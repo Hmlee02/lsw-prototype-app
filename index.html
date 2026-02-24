@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div id="wrap">
   <div id="app">
 
     <!-- ============================================ -->
@@ -63,88 +64,142 @@
 
     <!-- 모바일 전체메뉴 드로어 (KRDS krds-main-menu-mobile) -->
     <div id="mobile-nav" class="krds-main-menu-mobile">
-      <div class="gnb-wrap">
+      <div class="gnb-wrap type-header-tab is-active">
         <!-- gnb-header -->
         <div class="gnb-header">
+          <div class="gnb-utils">
+            <ul class="utility-list">
+              <li><button type="button" class="krds-btn small text">앱설정</button></li>
+              <li><button type="button" class="krds-btn small text">도움말</button></li>
+              <li><button type="button" class="krds-btn small text">고객센터</button></li>
+            </ul>
+          </div>
           <div class="gnb-login">
-            <button type="button" class="krds-btn large text">
-              <i class="svg-icon ico-log"></i> 로그인을 해주세요
+            <button type="button" class="krds-btn medium text">
+              <i class="svg-icon ico-log"></i> 로그인하고 맞춤 메뉴 보기
             </button>
           </div>
-          <div class="gnb-service-menu">
-            <a href="#" class="link">회원실 연동</a>
-            <a href="#" class="link">스크립</a>
-            <a href="#" class="link">이용안내</a>
-          </div>
-          <div class="sch-input">
-            <input type="text" class="krds-input" placeholder="법령명 또는 조문내용을 입력해 주세요" title="법령 검색" />
-            <button type="button" class="krds-btn medium icon">
-              <span class="sr-only">검색</span>
-              <i class="svg-icon ico-sch"></i>
-            </button>
+          <div class="form-group lsw-gnb-search">
+            <div class="form-conts btn-ico-wrap">
+              <label class="sr-only" for="gnbSearchMain">법령 검색</label>
+              <input type="text" id="gnbSearchMain" class="krds-input" placeholder="법령명 또는 조문내용을 입력해 주세요" title="법령 검색">
+              <button type="button" class="krds-btn medium icon">
+                <span class="sr-only">검색</span>
+                <i class="svg-icon ico-sch"></i>
+              </button>
+            </div>
           </div>
         </div>
         <!-- //gnb-header -->
 
+        <!-- gnb-tab (header tabs) -->
+        <div class="gnb-tab-nav">
+          <div class="menu-wrap">
+            <ul>
+              <li><a href="#mMenu-quick" class="gnb-main-trigger active">바로가기</a></li>
+              <li><a href="#mMenu-my" class="gnb-main-trigger">MY</a></li>
+              <li><a href="#mMenu-search" class="gnb-main-trigger">탐색</a></li>
+              <li><a href="#mMenu-support" class="gnb-main-trigger">센터</a></li>
+            </ul>
+          </div>
+        </div>
+
         <!-- gnb-body -->
         <div class="gnb-body">
           <div class="gnb-menu">
-            <div class="menu-wrap">
-              <ul>
-                <li><a href="#mGnb-law" class="gnb-main-trigger">법령</a></li>
-                <li><a href="#mGnb-admin" class="gnb-main-trigger">행정규칙</a></li>
-                <li><a href="#mGnb-case" class="gnb-main-trigger">판례</a></li>
-                <li><a href="#mGnb-self" class="gnb-main-trigger">자치법규</a></li>
-                <li><a href="#mGnb-info" class="gnb-main-trigger">법령정보</a></li>
-              </ul>
-            </div>
             <div class="submenu-wrap">
-              <div class="gnb-sub-list" id="mGnb-law">
-                <h2 class="sub-title">법령</h2>
-                <ul>
-                  <li><a href="#" class="gnb-sub-trigger">헌법/법률</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">조약</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">대통령령</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">총리령</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">부령</a></li>
+              <div class="gnb-sub-list" id="mMenu-quick">
+                <h2 class="sub-title">바로가기</h2>
+                <div class="lsw-gnb-section lsw-quick-grid">
+                  <button type="button" class="krds-btn medium text lsw-quick-link">불편법령신고센터</button>
+                  <button type="button" class="krds-btn medium text lsw-quick-link">도움말</button>
+                  <button type="button" class="krds-btn medium text lsw-quick-link">법령용어</button>
+                  <button type="button" class="krds-btn medium text lsw-quick-link">법률명약칭</button>
+                </div>
+
+                <div class="lsw-gnb-section lsw-gnb-card">
+                  <div class="lsw-card-head">
+                    <div>
+                      <p class="lsw-gnb-label">관심지역</p>
+                      <p class="lsw-gnb-desc">지방자치단체 별 맞춤 법령을 설정하세요</p>
+                    </div>
+                    <button type="button" class="krds-btn small secondary">지역설정</button>
+                  </div>
+                  <div class="lsw-card-body">
+                    <p class="lsw-gnb-value">등록된 지역 없음</p>
+                  </div>
+                </div>
+
+                <div class="lsw-gnb-section lsw-gnb-stats">
+                  <div class="lsw-stat">
+                    <span class="lsw-gnb-label">책갈피</span>
+                    <span class="krds-badge bg-light-warning">0건</span>
+                  </div>
+                  <div class="lsw-stat">
+                    <span class="lsw-gnb-label">메모</span>
+                    <span class="krds-badge bg-light-warning">0건</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="gnb-sub-list" id="mMenu-my">
+                <h2 class="sub-title">MY</h2>
+                <div class="lsw-gnb-section">
+                  <div class="lsw-gnb-row">
+                    <div>
+                      <p class="lsw-gnb-label">자주찾는 메뉴</p>
+                      <p class="lsw-gnb-desc">즐겨 쓰는 메뉴를 모아 빠르게 접근하세요</p>
+                    </div>
+                    <button type="button" class="krds-btn small text">메뉴설정</button>
+                  </div>
+                  <ul class="lsw-link-list">
+                    <li><a href="#" class="krds-btn medium text lsw-link-item">법령 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="krds-btn medium text lsw-link-item">행정규칙 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  </ul>
+                </div>
+
+                <div class="lsw-gnb-section">
+                  <div class="lsw-gnb-row">
+                    <div>
+                      <p class="lsw-gnb-label">즐겨찾기</p>
+                      <p class="lsw-gnb-desc">등록일자순으로 확인</p>
+                    </div>
+                    <button type="button" class="krds-btn small text">확인</button>
+                  </div>
+                  <div class="lsw-gnb-row">
+                    <div>
+                      <p class="lsw-gnb-label">최근본법령</p>
+                      <p class="lsw-gnb-desc">최근 본 날짜순으로 확인</p>
+                    </div>
+                    <button type="button" class="krds-btn small text">확인</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="gnb-sub-list" id="mMenu-search">
+                <h2 class="sub-title">탐색</h2>
+                <ul class="lsw-link-list">
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">법령 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">행정규칙 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">판례 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">자치법규 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">법령용어 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">법률명약칭 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">입법예고 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">법령안내 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">연령별형명법령집 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
                 </ul>
               </div>
-              <div class="gnb-sub-list" id="mGnb-admin">
-                <h2 class="sub-title">행정규칙</h2>
-                <ul>
-                  <li><a href="#" class="gnb-sub-trigger">훘령</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">예규</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">고시</a></li>
-                </ul>
-              </div>
-              <div class="gnb-sub-list" id="mGnb-case">
-                <h2 class="sub-title">판례</h2>
-                <ul>
-                  <li><a href="#" class="gnb-sub-trigger">법원판례</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">헌재판례</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">대법원전원합의체판결</a></li>
-                </ul>
-              </div>
-              <div class="gnb-sub-list" id="mGnb-self">
-                <h2 class="sub-title">자치법규</h2>
-                <ul>
-                  <li><a href="#" class="gnb-sub-trigger">조례</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">규칙</a></li>
-                </ul>
-              </div>
-              <div class="gnb-sub-list" id="mGnb-info">
-                <h2 class="sub-title">법령정보</h2>
-                <ul>
-                  <li><a href="#" class="gnb-sub-trigger">입법예고</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">법령안내</a></li>
-                  <li><a href="#" class="gnb-sub-trigger">연령별형명법령집</a></li>
+
+              <div class="gnb-sub-list" id="mMenu-support">
+                <h2 class="sub-title">센터</h2>
+                <ul class="lsw-link-list">
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">법령해석례 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">작성례 · 해석례 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text lsw-link-item">국가법령정보센터 개인정보처리방침 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
                 </ul>
               </div>
             </div>
-          </div>
-          <div class="gnb-bottom">
-            <a href="#" class="krds-btn medium text">법령해석례 <i class="svg-icon ico-angle right"></i></a>
-            <a href="#" class="krds-btn medium text">작성례 · 해석례 <i class="svg-icon ico-angle right"></i></a>
           </div>
         </div>
         <!-- //gnb-body -->
@@ -162,6 +217,7 @@
     <!-- ============================================ -->
     <!-- 검색 영역 -->
     <!-- ============================================ -->
+    <div id="container">
     <div class="lsw-search-area">
       <div class="inner">
         <div class="form-group">
@@ -622,6 +678,9 @@
       </button>
     </div>
 
+    </div><!-- /#container -->
+
+  </div>
   </div>
 
   <!-- KRDS JS -->
