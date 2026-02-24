@@ -1,0 +1,54 @@
+/* ===========================
+   KRDS Font-face & 기본 보정
+   =========================== */
+
+/* Pretendard GOV 폰트 (KRDS 디자인 시스템 표준 폰트) */
+@font-face {
+  font-family: 'Pretendard GOV';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('../resources/fonts/PretendardGOV-Regular.subset.woff2') format('woff2'),
+       url('../resources/fonts/PretendardGOV-Regular.subset.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Pretendard GOV';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('../resources/fonts/PretendardGOV-Medium.subset.woff2') format('woff2'),
+       url('../resources/fonts/PretendardGOV-Medium.subset.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Pretendard GOV';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('../resources/fonts/PretendardGOV-Bold.subset.woff2') format('woff2'),
+       url('../resources/fonts/PretendardGOV-Bold.subset.woff') format('woff');
+}
+
+/* KRDS common.css가 리셋을 포함하므로 최소 보정만 수행 */
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

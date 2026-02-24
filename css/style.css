@@ -1,0 +1,1820 @@
+/* ===========================
+   법제처 국가법령정보센터 Page Styles
+   (KRDS 컴포넌트 기반)
+   =========================== */
+
+:root {
+  /* 서브헤더(48px)+빠른메뉴 높이만큼 앵커 스크롤 여백 확보 */
+  scroll-padding-top: 100px;
+}
+
+/* 버튼 간격: KRDS 기본 0.8rem → 4px */
+#krds-header .header-container .header-actions {
+  gap: 4px;
+}
+
+#krds-header {
+  position: static;
+  top: auto;
+}
+
+/* btn-navi 높이: KRDS 기본 4rem(64px) → 모바일 52px 헤더에 맞게 44px */
+#krds-header .btn-navi.all,
+#krds-header .btn-navi.sch {
+  min-height: 44px;
+  padding: 0 4px;
+}
+
+/* 데스크톱에서도 헤더 네비 버튼(큰글씨/전체메뉴) 노출 */
+@media (min-width: 1024px) {
+  #krds-header .header-container .btn-navi.all {
+    display: inline-flex;
+  }
+}
+
+
+#krds-header .header-container .logo.lsw-logo a {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: none;
+  width: auto;
+  height: auto;
+}
+
+/* ---- 서브 헤더 (법령 타이틀 바) ---- */
+.lsw-sub-header {
+  background-color: var(--krds-color-light-primary-80);
+  color: var(--krds-color-light-gray-0);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.lsw-sub-header .inner {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 24px;
+  gap: 4px;
+}
+
+/* .krds-btn.icon.small = 특이도 0,3,0 → .lsw-sub-header 컨텍스트 추가로 0,3,0 확보 */
+.lsw-sub-header .krds-btn.lsw-btn-back {
+  color: var(--krds-color-light-gray-0);
+  flex-shrink: 0;
+}
+
+.lsw-sub-header .lsw-btn-back .svg-icon {
+  filter: brightness(0) invert(1);
+}
+
+.lsw-sub-title {
+  flex: 1;
+  font-size: var(--krds-mobile-font-size-body-small);
+  font-weight: 500;
+  color: var(--krds-color-light-gray-0);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.lsw-sub-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+/* .lsw-sub-header 컨텍스트 → 0,2,0 이상, KRDS .krds-btn = 0,1,0 보다 강함 */
+.lsw-sub-header .lsw-sub-actions .krds-btn {
+  color: var(--krds-color-light-gray-0);
+}
+
+.lsw-sub-header .lsw-sub-actions .svg-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* ---- 빠른 메뉴 버튼 영역 ---- */
+.lsw-quick-menu-area {
+  position: sticky;
+  top: 48px;
+  z-index: 10;
+  width: 100%;
+}
+
+.lsw-quick-menu-area .lsw-quick-menu-wrap {
+  background-color: var(--krds-color-light-gray-0);
+  box-shadow: 0 2px 8px var(--krds-light-color-alpha-shadow1);
+}
+.lsw-quick-menu-area .expand-wrap {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.lsw-quick-menu {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  padding: 8px 24px 10px;
+  margin: 0;
+  list-style: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.lsw-quick-menu::-webkit-scrollbar { display: none; }
+
+/* HTML에서 krds-btn 클래스 제거 → 순수 커스텀 클래스이므로 !important 불필요 */
+.lsw-quick-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 12px;
+  border-radius: var(--krds-radius-max);
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  font-weight: 500;
+  background-color: var(--krds-color-light-primary-5);
+  color: var(--krds-color-light-primary-80);
+  border: 1px solid var(--krds-color-light-primary-20);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.lsw-inline-arrow {
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+.lsw-quick-btn:hover,
+.lsw-quick-btn:focus {
+  background-color: var(--krds-color-light-primary-10);
+}
+
+.lsw-quick-btn .svg-icon {
+  width: 12px;
+  height: 12px;
+  filter: brightness(0) invert(1);
+}
+
+/* 추가 아이콘 매핑 */
+.svg-icon.ico-copy {
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center center;
+  mask-size: contain;
+  -webkit-mask-image: url(../resources/img/component/icon/ico_copy.svg);
+  mask-image: url(../resources/img/component/icon/ico_copy.svg);
+}
+
+.lsw-toggle-quick {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.lsw-toggle-label {
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  font-weight: 500;
+  color: var(--krds-color-light-alpha-white75);
+}
+
+.lsw-toggle-icon {
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s;
+}
+
+.lsw-quick-menu-area.collapsed .lsw-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* ---- 본문 법령 헤더 ---- */
+.lsw-law-header {
+  text-align: center;
+  padding: 24px 0 16px;
+  border-bottom: none;
+}
+
+.lsw-law-title {
+  font-size: var(--krds-mobile-font-size-heading-large);
+  font-weight: 700;
+  color: var(--krds-color-light-gray-90);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.lsw-law-abbr {
+  margin-top: 4px;
+  font-size: var(--krds-mobile-font-size-body-small);
+  color: var(--krds-color-light-gray-60);
+}
+
+/* ---- 법령 메타 정보 ---- */
+.lsw-law-meta {
+  text-align: center;
+  padding: 12px 0 20px;
+  border-bottom: 1px solid var(--krds-color-light-gray-10);
+  margin-bottom: 20px;
+}
+
+/* KRDS badge 행: 시행일 · 법률번호 · 개정종류
+   .lsw-law-meta 컨텍스트로 0,2,0 확보 → !important 불필요 */
+.lsw-law-meta .lsw-law-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.lsw-law-info-secondary {
+  margin-top: 8px;
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  color: var(--krds-color-light-gray-60);
+  line-height: 1.5;
+}
+
+/* 컨텍스트 0,3,0 → KRDS .krds-btn.small(0,2,0) 비교: 우선적용 */
+.lsw-law-meta .lsw-law-info-secondary .krds-btn {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+}
+
+/* 개정 날짜 badge (조문 내에 인라인으로 표시)
+   .lsw-article 컨텍스트 → 0,2,0, KRDS .krds-badge(0,1,0)보다 강함 */
+.lsw-article .lsw-amendment-badge {
+  margin-top: 6px;
+  vertical-align: middle;
+  font-size: 1.1rem;
+  padding: 2px 6px;
+}
+/* 신구법 비교 트리거 (클릭 가능한 배지) */
+.lsw-article .lsw-compare-trigger {
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.15s, box-shadow 0.15s;
+}
+.lsw-article .lsw-compare-trigger:hover,
+.lsw-article .lsw-compare-trigger:focus {
+  box-shadow: 0 0 0 2px var(--krds-color-light-secondary-40);
+  outline: none;
+}
+
+/* ---- 법령 장 제목 ---- */
+.lsw-chapter-title {
+  font-size: var(--krds-mobile-font-size-heading-xsmall);
+  font-weight: 700;
+  color: var(--krds-color-light-gray-90);
+  text-align: center;
+  padding: 8px 0 16px;
+  letter-spacing: 0.02em;
+}
+
+/* ---- 법조문 본문 ---- */
+.lsw-law-body {
+  padding-bottom: 40px;
+}
+
+.lsw-article {
+  margin-bottom: 12px;
+}
+
+.content-inner {
+  position: relative;
+}
+.lsw-article-text {
+  font-size: var(--krds-mobile-font-size-body-small);
+  line-height: 1.8;
+  color: var(--krds-color-light-gray-80);
+  word-break: keep-all;
+}
+
+.lsw-article-title {
+  font-weight: 700;
+  color: var(--krds-color-light-primary-60);
+  margin-right: 4px;
+}
+
+/* 조항 목록 (KRDS text-list 확장) */
+.lsw-clause-list {
+  margin-top: 8px;
+}
+
+.lsw-clause-list > li {
+  font-size: var(--krds-mobile-font-size-body-small);
+  line-height: 1.8;
+  color: var(--krds-color-light-gray-80);
+  word-break: keep-all;
+  margin-bottom: 8px;
+}
+
+.krds-info-list > li > .krds-info-list {
+   margin-top: 6px;
+   gap: 0;
+}
+
+.krds-info-list > li > .krds-info-list > li {
+   font-size: var(--krds-mobile-font-size-body-small);
+   line-height: 1.8;
+   margin-bottom: 4px;
+}
+
+/* ---- 하단 툴바 (KRDS Tabbar) ---- */
+.lsw-bottom-toolbar {
+  position: sticky;
+  bottom: 0;
+  z-index: 200;
+  background-color: var(--krds-color-light-gray-0);
+  border-top: 1px solid var(--krds-color-light-gray-10);
+  box-shadow: 0 -2px 8px var(--krds-light-color-alpha-shadow1);
+}
+
+.lsw-tabbar {
+  width: 100%;
+}
+
+/* 가로 스크롤 허용 (KRDS Tabbar) */
+.lsw-tabbar-list {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.lsw-tabbar-list::-webkit-scrollbar {
+  display: none;
+}
+
+.lsw-tabbar-item {
+  flex: 1;
+  min-width: 64px;
+  white-space: nowrap;
+}
+
+.lsw-tabbar-btn {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 4px;
+  background: none;
+  border: none;
+  color: var(--krds-color-light-gray-60);
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.lsw-tabbar-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 3px;
+  background: transparent;
+  transition: background-color 0.15s;
+}
+
+.lsw-tabbar-item.active .lsw-tabbar-btn {
+  color: var(--krds-color-light-secondary-80);
+  font-weight: 700;
+  background-color: var(--krds-color-light-secondary-5);
+}
+
+.lsw-tabbar-item.active .lsw-tabbar-btn i {
+   background-color: var(--krds-color-light-secondary-80);
+}
+
+.lsw-tabbar-item.active .lsw-tabbar-btn::after {
+  background: var(--krds-color-light-secondary-80);
+  width: 100%;
+}
+
+.lsw-tabbar-icon {
+  width: 22px;
+  height: 22px;
+  color: currentColor;
+}
+
+.lsw-tabbar-label {
+  line-height: 1.3;
+}
+
+/* =========================================================
+   메인 페이지 (index.html) Styles
+   ========================================================= */
+
+/* ---- 검색 영역 ---- */
+.lsw-search-area {
+  background-color: var(--krds-color-light-primary-60);
+  padding: 12px 16px 16px;
+}
+
+.lsw-search-wrap {
+  position: relative;
+  background-color: var(--krds-color-light-gray-0);
+  border-radius: var(--krds-radius-medium1);
+  overflow: hidden;
+}
+
+.lsw-search-wrap .krds-input {
+  border: 2px solid var(--krds-color-light-primary-50);
+  border-radius: var(--krds-radius-medium1);
+  height: 48px;
+  padding-right: 88px; /* increased padding for two buttons */
+  font-size: var(--krds-mobile-font-size-body-small);
+}
+
+.lsw-search-actions {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* .krds-btn.medium.icon(0,3,0) 충돌 → .lsw-search-wrap 컨텍스트 + .krds-btn 클래스 조합으로 0,3,0 확보 */
+.lsw-search-wrap .krds-btn.lsw-btn-voice,
+.lsw-search-wrap .krds-btn.lsw-btn-search {
+  color: var(--krds-color-light-primary-50);
+}
+
+/* MA 인증마크 */
+.lsw-ma-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--krds-radius-max);
+  background-color: var(--krds-color-light-primary-60);
+  color: var(--krds-color-light-gray-0);
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+/* ---- 카테고리 그리드 ---- */
+.lsw-category-section {
+  padding: 20px 16px 8px;
+}
+
+.lsw-category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px 4px;
+}
+
+.lsw-category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 4px 8px;
+  text-decoration: none;
+  border-radius: var(--krds-radius-medium1);
+  transition: background-color 0.2s;
+  text-align: center;
+}
+
+.lsw-category-item:hover,
+.lsw-category-item:focus {
+  background-color: var(--krds-color-light-gray-5);
+}
+
+.lsw-cate-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 6px;
+}
+
+.lsw-cate-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.lsw-cate-label {
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  color: var(--krds-color-light-gray-80);
+  font-weight: 500;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+/* ---- 퀵링크 버튼 ---- */
+.lsw-quicklink-section {
+  padding: 4px 16px 12px;
+}
+
+.lsw-quicklink-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* .lsw-quicklink-section 컨텍스트 + .krds-btn 클래스 → 0,3,0
+   KRDS .krds-btn.small.tertiary(0,3,0): 동등 특이도, 나중 로드로 우선적용 */
+.lsw-quicklink-section .krds-btn.lsw-quicklink-btn {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  padding: 8px 6px;
+  border-radius: var(--krds-radius-xsmall1);
+  white-space: nowrap;
+}
+
+/* ---- AI 배너 ---- */
+.lsw-ai-banner {
+  margin: 0 16px 12px;
+}
+
+.lsw-ai-banner-link {
+  display: block;
+  text-decoration: none;
+}
+
+.lsw-ai-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--krds-color-light-success-5) 0%, var(--krds-color-light-success-10) 100%);
+  border-radius: var(--krds-radius-medium1);
+  padding: 12px 16px;
+}
+
+.lsw-ai-text {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  color: var(--krds-color-light-gray-80);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.lsw-ai-highlight {
+  color: var(--krds-color-light-primary-50);
+  font-weight: 700;
+}
+
+/* 0,2,0 > .krds-btn.small(0,2,0): 동급, 나중 로드 → 우선적용 */
+.lsw-ai-banner-inner .krds-btn {
+  flex-shrink: 0;
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  white-space: nowrap;
+}
+
+/* ---- 배너 캐러셀 ---- */
+.lsw-banner-section {
+  margin: 0 16px 16px;
+}
+
+.lsw-banner-card {
+  background: linear-gradient(135deg, var(--krds-color-light-secondary-80) 0%, var(--krds-color-light-primary-60) 100%);
+  border-radius: var(--krds-radius-xlarge1);
+  padding: 20px;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.lsw-banner-content {
+  color: var(--krds-color-light-gray-0);
+}
+
+.lsw-banner-title {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  font-weight: 400;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.lsw-banner-desc {
+  font-size: var(--krds-mobile-font-size-body-medium);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.lsw-banner-sub {
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+.lsw-banner-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.lsw-banner-indicator .swiper-pagination {
+  position: static;
+  width: auto;
+}
+
+/* ---- 최신 법령정보 ---- */
+.lsw-latest-section {
+  padding: 0 0 24px;
+}
+
+.lsw-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 8px;
+}
+
+.lsw-section-title {
+  font-size: var(--krds-mobile-font-size-heading-small);
+  font-weight: 700;
+  color: var(--krds-color-light-gray-90);
+}
+
+/* 법령 리스트 */
+.lsw-law-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lsw-law-list-item {
+  border-bottom: 1px solid var(--krds-color-light-gray-10);
+}
+
+.lsw-law-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.15s;
+}
+
+.lsw-law-link:hover,
+.lsw-law-link:focus {
+  background-color: var(--krds-color-light-gray-5);
+}
+
+.lsw-law-num {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  color: var(--krds-color-light-gray-60);
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 20px;
+  padding-top: 2px;
+}
+
+.lsw-law-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.lsw-law-name {
+  font-size: var(--krds-mobile-font-size-body-small);
+  font-weight: 500;
+  color: var(--krds-color-light-gray-90);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.lsw-law-date {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  color: var(--krds-color-light-primary-50);
+  line-height: 1.5;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lsw-law-link .svg-icon {
+  flex-shrink: 0;
+  align-self: center;
+  width: 16px;
+  height: 16px;
+  opacity: 0.5;
+}
+
+/* ---- 플로팅 Quick Guide 버튼 ---- */
+.lsw-floating-wrap {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 300;
+}
+
+.lsw-floating-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--krds-radius-max);
+  background: linear-gradient(135deg, var(--krds-color-light-information-30) 0%, var(--krds-color-light-information-50) 100%);
+  color: var(--krds-color-light-gray-0);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px var(--krds-light-color-alpha-shadow3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.lsw-floating-btn:hover,
+.lsw-floating-btn:focus {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px var(--krds-light-color-alpha-shadow3);
+}
+
+.lsw-floating-text {
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* ========================================
+   검색 드롭다운 (인기/최근 검색어)
+   ======================================== */
+.lsw-search-dropdown {
+  display: none;
+  margin-top: 6px;
+  background-color: var(--krds-color-light-gray-0);
+  border-radius: var(--krds-radius-medium1);
+  box-shadow: 0 4px 16px var(--krds-light-color-alpha-shadow2);
+  overflow: hidden;
+  border: 1px solid var(--krds-color-light-gray-10);
+}
+.lsw-search-dropdown.is-open {
+  display: block;
+}
+.lsw-search-dropdown-section {
+  padding: 12px 16px;
+}
+.lsw-search-dropdown-section + .lsw-search-dropdown-section {
+  border-top: 1px solid var(--krds-color-light-gray-10);
+}
+.lsw-search-dropdown-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--krds-color-light-gray-50);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+.lsw-search-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.lsw-search-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: var(--krds-radius-max);
+  border: 1px solid var(--krds-color-light-primary-30);
+  background: transparent;
+  color: var(--krds-color-light-primary-60);
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.lsw-search-chip:hover,
+.lsw-search-chip:focus {
+  background-color: var(--krds-color-light-primary-5);
+}
+.lsw-recent-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.lsw-recent-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lsw-recent-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  background: none;
+  border: none;
+  color: var(--krds-color-light-gray-80);
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  cursor: pointer;
+  text-align: left;
+  flex: 1;
+}
+.lsw-recent-item .svg-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--krds-color-light-gray-40);
+  flex-shrink: 0;
+}
+.lsw-recent-delete {
+  background: none;
+  border: none;
+  color: var(--krds-color-light-gray-40);
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1;
+}
+
+/* ========================================
+   개인화 위젯 (최근 본 법령 + 개정 알림)
+   ======================================== */
+.lsw-personal-section {
+  padding: 16px 0 12px;
+  border-top: 8px solid var(--krds-color-light-gray-5);
+}
+.lsw-personal-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 16px 8px;
+}
+.lsw-personal-scroll::-webkit-scrollbar {
+  display: none;
+}
+.lsw-personal-cards {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+}
+.lsw-personal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 148px;
+  flex-shrink: 0;
+  background-color: var(--krds-color-light-gray-0);
+  border: 1px solid var(--krds-color-light-gray-10);
+  border-radius: var(--krds-radius-medium1);
+  padding: 12px;
+  text-decoration: none;
+  transition: box-shadow 0.2s;
+}
+.lsw-personal-card:hover {
+  box-shadow: 0 2px 10px var(--krds-light-color-alpha-shadow2);
+}
+.lsw-personal-card-name {
+  font-size: var(--krds-mobile-font-size-body-small);
+  font-weight: 700;
+  color: var(--krds-color-light-gray-90);
+  line-height: 1.4;
+  margin-top: 4px;
+  word-break: keep-all;
+}
+.lsw-personal-card-article {
+  font-size: 1.1rem;
+  color: var(--krds-color-light-gray-60);
+  line-height: 1.4;
+  word-break: keep-all;
+  margin-top: 2px;
+}
+.lsw-personal-card-info {
+  font-size: 1.1rem;
+  color: var(--krds-color-light-primary-50);
+  margin-top: 4px;
+}
+.lsw-personal-card--empty {
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--krds-color-light-gray-20);
+  color: var(--krds-color-light-gray-40);
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  gap: 6px;
+  text-align: center;
+}
+.lsw-personal-card--empty .svg-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--krds-color-light-gray-30);
+}
+/* 개정 알림 배너 */
+.lsw-amend-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 16px 0;
+  padding: 10px 14px;
+  background-color: var(--krds-color-light-warning-5);
+  border: 1px solid var(--krds-color-light-warning-30);
+  border-radius: var(--krds-radius-medium1);
+}
+.lsw-amend-alert .svg-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--krds-color-light-warning-50);
+}
+.lsw-amend-alert-text {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  color: var(--krds-color-light-gray-80);
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* ========================================
+   목차 트리 드로어 (법령 본문 뷰어)
+   ======================================== */
+.lsw-toc-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--krds-light-color-alpha-shadow3);
+  z-index: 500;
+}
+.lsw-toc-overlay.is-open {
+  display: block;
+}
+.lsw-toc-drawer {
+  position: fixed;
+  top: 0;
+  right: max(0px, (100vw - 480px) / 2);
+  width: 82vw;
+  max-width: 320px;
+  height: 100vh;
+  background: var(--krds-color-light-gray-0);
+  z-index: 501;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease, visibility 0.3s ease;
+  box-shadow: -4px 0 16px var(--krds-light-color-alpha-shadow2);
+  visibility: hidden;
+}
+.lsw-toc-drawer.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+.lsw-toc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--krds-color-light-gray-10);
+  flex-shrink: 0;
+}
+.lsw-toc-header-title {
+  font-size: var(--krds-mobile-font-size-body-medium);
+  font-weight: 700;
+  color: var(--krds-color-light-gray-90);
+}
+.lsw-toc-body {
+  overflow-y: auto;
+  flex: 1;
+  padding: 4px 0;
+}
+.lsw-toc-chapter-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: var(--krds-mobile-font-size-body-medium);
+  font-weight: 700;
+  color: var(--krds-color-light-gray-90);
+  background: var(--krds-color-light-gray-0);
+  margin-top: 4px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s;
+}
+.lsw-toc-chapter-toggle:hover {
+  background: var(--krds-color-light-primary-10);
+}
+.lsw-toc-toggle-icon {
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.lsw-toc-chapter-title.is-expanded {
+   background-color: var(--krds-color-light-secondary-5);
+  border-left: 3px solid var(--krds-color-light-primary-50);
+  color: var(--krds-color-light-primary-60);
+}
+.lsw-toc-chapter-toggle.is-expanded .lsw-toc-toggle-icon {
+  transform: rotate(180deg);
+}
+/* 목차 조문 뱃지 (개정 표시) */
+.lsw-toc-badge {
+  display: inline-block;
+  font-size: 1rem;
+  padding: 1px 5px;
+  border-radius: var(--krds-radius-xsmall1);
+  background: var(--krds-color-light-secondary-10);
+  color: var(--krds-color-light-secondary-60);
+  font-weight: 500;
+  margin-left: auto;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+.lsw-toc-article-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.lsw-toc-article-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 10px 20px;
+  font-size: var(--krds-mobile-font-size-body-small);
+  color: var(--krds-color-light-gray-80);
+  text-decoration: none;
+  border-bottom: 1px solid var(--krds-color-light-gray-5);
+  transition: background-color 0.15s;
+}
+.lsw-toc-article-link:hover {
+  background-color: var(--krds-color-light-primary-5);
+  color: var(--krds-color-light-primary-60);
+}
+.lsw-toc-article-link.is-current {
+  color: var(--krds-color-light-secondary-60);
+  font-weight: 700;
+}
+/* 법령 상세 페이지 플로팅 영역 */
+.lsw-detail-floating {
+  position: fixed;
+  bottom: 80px;
+  right: 14px;
+  z-index: 299;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 공통 플로팅 버튼 스타일 */
+.lsw-float-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--krds-radius-max);
+  background-color: var(--krds-color-light-gray-0);
+  border: 1px solid var(--krds-color-light-gray-20);
+  color: var(--krds-color-light-primary-60);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  box-shadow: 0 2px 8px var(--krds-light-color-alpha-shadow2);
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: box-shadow 0.2s;
+}
+.lsw-float-btn:hover {
+  box-shadow: 0 4px 12px var(--krds-light-color-alpha-shadow2);
+}
+.lsw-float-btn svg,
+.lsw-float-btn .svg-icon {
+  width: 18px;
+  height: 18px;
+  background-color: var(--krds-color-light-gray-0);
+}
+.lsw-reading-float-btn {
+  background-color: var(--krds-color-light-primary-60);
+  color: var(--krds-color-light-gray-0);
+  border-color: var(--krds-color-light-primary-60);
+}
+.lsw-reading-float-btn svg {
+  fill: var(--krds-color-light-gray-0);
+  color: var(--krds-color-light-gray-0);
+}
+
+/* ========================================
+   조문 액션 버튼 + 바텀 시트
+   ======================================== */
+.lsw-article-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+.lsw-article-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: none;
+  border: 1px solid var(--krds-color-light-gray-20);
+  border-radius: var(--krds-radius-max);
+  font-size: 1.2rem;
+  color: var(--krds-color-light-gray-60);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.lsw-article-action-btn:hover {
+  border-color: var(--krds-color-light-primary-40);
+  color: var(--krds-color-light-primary-60);
+}
+.lsw-article-action-btn .svg-icon {
+  width: 14px;
+  height: 14px;
+}
+/* 바텀 시트 */
+.lsw-action-sheet-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--krds-light-color-alpha-shadow3);
+  z-index: 600;
+}
+.lsw-action-sheet-overlay.is-open {
+  display: block;
+}
+.lsw-action-sheet {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  background: var(--krds-color-light-gray-0);
+  border-radius: var(--krds-radius-xlarge1) var(--krds-radius-xlarge1) 0 0;
+  z-index: 601;
+  padding: 12px 0 max(24px, env(safe-area-inset-bottom)) 0;
+  transition: bottom 0.3s ease;
+}
+.lsw-action-sheet.is-open {
+  bottom: 0;
+}
+.lsw-action-sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--krds-color-light-gray-20);
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
+.lsw-action-sheet-article-ref {
+  font-size: var(--krds-mobile-font-size-body-medium);
+  font-weight: 600;
+  color: var(--krds-color-light-gray-60);
+  padding: 0 20px 10px;
+  border-bottom: 1px solid var(--krds-color-light-gray-10);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lsw-action-sheet-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+}
+.lsw-action-sheet-item button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 20px;
+  background: none;
+  border: none;
+  font-size: var(--krds-mobile-font-size-body-small);
+  color: var(--krds-color-light-gray-80);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s;
+}
+.lsw-action-sheet-item button:hover {
+  background-color: var(--krds-color-light-gray-5);
+}
+.lsw-action-sheet-item .svg-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--krds-color-light-primary-60);
+  flex-shrink: 0;
+}
+
+/* ========================================
+   큰글씨 모드
+   ======================================== */
+
+/* 큰글씨 모드 적용 시
+   body.lsw-font-large .lsw-xxx 는 0,2,0 → 기본 .lsw-xxx(0,1,0)보다 강함 → !important 불필요 */
+body.lsw-font-large .lsw-article-text,
+body.lsw-font-large .lsw-clause-list > li {
+  font-size: var(--krds-mobile-font-size-body-medium);
+  line-height: 2;
+}
+body.lsw-font-large .lsw-law-title {
+  font-size: var(--krds-mobile-font-size-heading-xlarge);
+}
+body.lsw-font-large .lsw-article-title {
+  display: block;
+  margin-bottom: 6px;
+}
+body.lsw-font-large .lsw-chapter-title {
+  font-size: var(--krds-mobile-font-size-heading-small);
+}
+body.lsw-font-large .lsw-quick-btn {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  padding: 8px 14px;
+}
+body.lsw-font-large .lsw-law-name {
+  font-size: var(--krds-mobile-font-size-body-medium);
+}
+body.lsw-font-large .lsw-law-date {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+}
+
+/* ================================================================
+   480px 컨테이너 기준 fixed 포지션 보정
+   데스크탑 미리보기 시 fixed 요소들이 뷰포트 전폭으로 벗어나는 문제 수정
+   ================================================================ */
+
+/* -- 바텀 시트: 항상 #app(480px) 너비 내에서 중앙 표시
+   #app 컨텍스트로 !important 제거 -- */
+#app .lsw-action-sheet {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+}
+
+
+/* -- KRDS 모바일 전체메뉴: #app(480px) 폭에 맞추고 transform으로 슬라이드
+   #app 컨텍스트 (ID 특이도 1,x,x) → KRDS .krds-main-menu-mobile (0,1,0) 자동 승리 -- */
+#app .krds-main-menu-mobile {
+  left: max(0px, calc((100vw - 480px) / 2));
+  width: min(100vw, 480px);
+  right: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease, visibility 0.3s;
+}
+#app .krds-main-menu-mobile.is-open {
+  transform: translateX(0);
+}
+
+/* -- 법령 상세 플로팅 버튼: #app 오른쪽 가장자리 기준 -- */
+.lsw-detail-floating {
+  right: max(14px, calc((100vw - 480px) / 2 + 14px));
+}
+
+/* -- 메인 Quick Guide 플로팅 버튼: #app 오른쪽 가장자리 기준 -- */
+.lsw-floating-wrap {
+  right: max(20px, calc((100vw - 480px) / 2 + 20px));
+}
+
+/* ========================================
+   읽기 설정 바텀 시트
+   ======================================== */
+.lsw-reading-settings-body {
+  padding: 8px 0;
+}
+.lsw-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--krds-color-light-gray-5);
+}
+.lsw-setting-row:last-child {
+  border-bottom: none;
+}
+.lsw-setting-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--krds-mobile-font-size-body-small);
+  font-weight: 500;
+  color: var(--krds-color-light-gray-80);
+}
+.lsw-setting-label svg {
+  flex-shrink: 0;
+  color: var(--krds-color-light-primary-60);
+}
+.lsw-setting-options {
+  display: flex;
+  gap: 6px;
+}
+.lsw-option-btn {
+  padding: 6px 12px;
+  border-radius: var(--krds-radius-max);
+  font-size: var(--krds-mobile-font-size-label-small);
+  font-weight: 500;
+  background: var(--krds-color-light-gray-5);
+  color: var(--krds-color-light-gray-60);
+  border: 1px solid var(--krds-color-light-gray-10);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lsw-option-btn:hover {
+  background: var(--krds-color-light-gray-10);
+}
+.lsw-option-btn.is-active {
+  background: var(--krds-color-light-primary-60);
+  color: var(--krds-color-light-gray-0);
+  border-color: var(--krds-color-light-primary-60);
+}
+
+/* ========================================
+   신구법 비교 레이어
+   ======================================== */
+.lsw-compare-sheet {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.lsw-compare-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 12px;
+  border-bottom: 1px solid var(--krds-color-light-gray-10);
+}
+.lsw-compare-title {
+  font-size: var(--krds-mobile-font-size-body-medium);
+  font-weight: 700;
+  color: var(--krds-color-light-gray-90);
+}
+.lsw-compare-body {
+  padding: 16px 20px;
+}
+.lsw-compare-article-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.lsw-compare-article-name {
+  font-size: var(--krds-mobile-font-size-body-small);
+  font-weight: 600;
+  color: var(--krds-color-light-gray-80);
+}
+.lsw-compare-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.lsw-compare-panel {
+  border-radius: var(--krds-radius-medium1);
+  overflow: hidden;
+}
+.lsw-compare-old {
+  border: 1px solid var(--krds-color-light-gray-20);
+}
+.lsw-compare-new {
+  border: 1px solid var(--krds-color-light-primary-30);
+}
+.lsw-compare-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--krds-color-light-gray-5);
+}
+.lsw-compare-new .lsw-compare-panel-header {
+  background: var(--krds-color-light-primary-5);
+}
+.lsw-compare-date {
+  font-size: var(--krds-mobile-font-size-label-small);
+  color: var(--krds-color-light-gray-60);
+}
+.lsw-compare-text {
+  padding: 14px;
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  line-height: 1.7;
+  color: var(--krds-color-light-gray-80);
+  word-break: keep-all;
+}
+.lsw-compare-text p {
+  margin-bottom: 8px;
+}
+.lsw-compare-list {
+  padding-left: 20px;
+  margin: 0;
+}
+.lsw-compare-list li {
+  margin-bottom: 6px;
+}
+.lsw-compare-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  color: var(--krds-color-light-gray-40);
+}
+/* 변경 하이라이트 */
+.lsw-diff-del {
+  background-color: #fde8e8;
+  color: #c53030;
+  text-decoration: line-through;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+.lsw-diff-add {
+  background-color: #e6ffec;
+  color: #1a7f37;
+  font-weight: 600;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+/* ========================================
+   플로팅 조문 액션 툴바
+   ======================================== */
+.lsw-floating-toolbar {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 298;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--krds-color-light-gray-90);
+  border-radius: var(--krds-radius-large1);
+  padding: 6px 10px;
+  box-shadow: 0 4px 16px var(--krds-light-color-alpha-shadow3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.lsw-floating-toolbar.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lsw-ftb-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 10px;
+  border: none;
+  background: none;
+  color: var(--krds-color-light-gray-0);
+  cursor: pointer;
+  border-radius: var(--krds-radius-small1);
+  transition: background-color 0.15s;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.lsw-ftb-btn:hover {
+  background: var(--krds-color-light-alpha-white10);
+}
+.lsw-ftb-btn .svg-icon {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+/* 선택된 조문 하이라이트 */
+.lsw-article.is-selected {
+  background-color: var(--krds-color-light-primary-5);
+  border-radius: var(--krds-radius-small1);
+  outline: 2px solid var(--krds-color-light-primary-30);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   다크 모드
+   ======================================== */
+body.lsw-dark-mode {
+  background-color: var(--krds-color-light-gray-100);
+  color: var(--krds-color-light-gray-10);
+}
+body.lsw-dark-mode #app {
+  background-color: var(--krds-color-light-gray-90);
+}
+body.lsw-dark-mode #krds-header {
+  background-color: var(--krds-color-light-gray-100);
+}
+body.lsw-dark-mode #krds-header .btn-navi,
+body.lsw-dark-mode #krds-header .header-actions .krds-btn.icon,
+body.lsw-dark-mode #krds-header .header-actions .krds-btn.text {
+  color: var(--krds-color-light-gray-10);
+}
+body.lsw-dark-mode #krds-header .header-container .btn-navi::before {
+  background-color: var(--krds-color-light-gray-10);
+}
+body.lsw-dark-mode #krds-header .btn-navi .svg-icon,
+body.lsw-dark-mode #krds-header .header-actions .svg-icon {
+  filter: brightness(0) invert(1);
+}
+/* 공통 아이콘 톤업: 대부분 currentColor 기반이라 색상만 올림 */
+body.lsw-dark-mode .svg-icon {
+  color: var(--krds-color-light-gray-10);
+}
+body.lsw-dark-mode .lsw-inline-arrow path,
+body.lsw-dark-mode .lsw-icon-font path {
+  stroke: var(--krds-color-light-gray-10);
+  fill: var(--krds-color-light-gray-10);
+}
+body.lsw-dark-mode #krds-masthead {
+  background-color: var(--krds-color-light-secondary-95);
+}
+body.lsw-dark-mode #krds-masthead .nuri-txt {
+  color: var(--krds-color-light-gray-10);
+}
+body.lsw-dark-mode .lsw-sub-header {
+  background-color: var(--krds-color-light-secondary-90);
+}
+body.lsw-dark-mode .lsw-quick-menu-area {
+  background-color: var(--krds-color-light-gray-100);
+}
+body.lsw-dark-mode .lsw-quick-menu-area .lsw-quick-menu-wrap {
+  background-color: var(--krds-color-light-gray-90);
+  border-color: var(--krds-color-light-gray-80);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+body.lsw-dark-mode .lsw-quick-btn {
+  background-color: var(--krds-color-light-gray-80);
+  color: var(--krds-color-light-gray-5);
+  border-color: var(--krds-color-light-gray-70);
+}
+body.lsw-dark-mode .lsw-quick-btn:hover,
+body.lsw-dark-mode .lsw-quick-btn:focus {
+  background-color: var(--krds-color-light-gray-70);
+}
+body.lsw-dark-mode .lsw-quick-btn .svg-icon {
+  filter: brightness(0) invert(1);
+}
+/* KRDS 배지 다크모드 보정 */
+body.lsw-dark-mode .krds-badge {
+  color: var(--krds-color-light-gray-5);
+  border-color: var(--krds-color-light-gray-70);
+  background-color: var(--krds-color-light-gray-80);
+}
+body.lsw-dark-mode .krds-badge.bg-light-primary {
+  color: var(--krds-color-light-gray-0);
+  background-color: var(--krds-color-light-primary-70);
+  border-color: var(--krds-color-light-primary-80);
+}
+body.lsw-dark-mode .krds-badge.bg-light-secondary {
+  color: var(--krds-color-light-gray-0);
+  background-color: var(--krds-color-light-secondary-70);
+  border-color: var(--krds-color-light-secondary-80);
+}
+body.lsw-dark-mode .krds-badge.bg-light-gray {
+  color: var(--krds-color-light-gray-10);
+  background-color: var(--krds-color-light-gray-80);
+  border-color: var(--krds-color-light-gray-70);
+}
+body.lsw-dark-mode .krds-badge.outline-primary {
+  color: var(--krds-color-light-primary-20);
+  background-color: var(--krds-color-light-primary-95);
+  border-color: var(--krds-color-light-primary-40);
+}
+body.lsw-dark-mode .content {
+  background-color: var(--krds-color-light-gray-90);
+}
+body.lsw-dark-mode .content-inner {
+  background-color: var(--krds-color-light-gray-100);
+}
+body.lsw-dark-mode .lsw-law-header {
+  border-color: var(--krds-color-light-gray-80);
+}
+body.lsw-dark-mode .lsw-law-title {
+  color: var(--krds-color-light-gray-5);
+}
+body.lsw-dark-mode .lsw-law-abbr {
+  color: var(--krds-color-light-graphic-30);
+}
+body.lsw-dark-mode .lsw-law-meta {
+  border-color: var(--krds-color-light-gray-80);
+}
+body.lsw-dark-mode .lsw-chapter-title {
+  color: var(--krds-color-light-primary-20);
+}
+body.lsw-dark-mode .lsw-article-text {
+  color: var(--krds-color-light-gray-20);
+}
+body.lsw-dark-mode .lsw-article-title {
+  color: var(--krds-color-light-primary-30);
+}
+body.lsw-dark-mode .lsw-clause-list > li {
+  color: var(--krds-color-light-gray-20);
+}
+body.lsw-dark-mode .lsw-bottom-toolbar {
+  background-color: var(--krds-color-light-primary-90);
+  border-color: var(--krds-color-light-gray-80);
+}
+body.lsw-dark-mode .lsw-bottom-toolbar .lsw-tabbar-btn {
+  color: var(--krds-color-light-graphic-30);
+}
+body.lsw-dark-mode .lsw-bottom-toolbar .lsw-tabbar-btn:hover {
+  color: var(--krds-color-light-primary-30);
+}
+body.lsw-dark-mode .lsw-bottom-toolbar .lsw-tabbar-btn::after {
+  background: transparent;
+}
+body.lsw-dark-mode .lsw-bottom-toolbar .lsw-tabbar-item.active .lsw-tabbar-btn {
+  color: #60a5fa;
+  background-color: #16213e;
+}
+body.lsw-dark-mode .lsw-bottom-toolbar .lsw-tabbar-item.active .lsw-tabbar-btn::after {
+  background: #60a5fa;
+}
+body.lsw-dark-mode .lsw-article-action-btn {
+  border-color: #374151;
+  color: #94a3b8;
+}
+body.lsw-dark-mode .lsw-action-sheet,
+body.lsw-dark-mode .lsw-reading-settings,
+body.lsw-dark-mode .lsw-compare-sheet {
+  background: #1e293b;
+}
+body.lsw-dark-mode .lsw-action-sheet-article-ref {
+  color: #94a3b8;
+  border-color: #374151;
+}
+body.lsw-dark-mode .lsw-action-sheet-item button {
+  color: #e0e0e0;
+}
+body.lsw-dark-mode .lsw-action-sheet-item button:hover {
+  background-color: #2d3748;
+}
+body.lsw-dark-mode .lsw-setting-row {
+  border-color: #2d3748;
+}
+body.lsw-dark-mode .lsw-setting-label {
+  color: #d4d4d8;
+}
+body.lsw-dark-mode .lsw-option-btn {
+  background: #2d3748;
+  color: #94a3b8;
+  border-color: #374151;
+}
+body.lsw-dark-mode .lsw-toc-drawer {
+  background: #1e293b;
+}
+body.lsw-dark-mode .lsw-toc-header {
+  border-color: #374151;
+}
+body.lsw-dark-mode .lsw-toc-header-title {
+  color: #f0f0f0;
+}
+body.lsw-dark-mode .lsw-toc-chapter-title {
+  background: #16213e;
+  color: #60a5fa;
+  border-left-color: #3b82f6;
+}
+body.lsw-dark-mode .lsw-toc-article-link {
+  color: #cbd5e1;
+  border-color: #2d3748;
+}
+body.lsw-dark-mode .lsw-toc-article-link:hover {
+  background: #1e3a5f;
+  color: #60a5fa;
+}
+body.lsw-dark-mode .lsw-toc-article-link.is-current {
+  background: #1e3a5f;
+  color: #60a5fa;
+}
+body.lsw-dark-mode .lsw-float-btn {
+  background-color: #2d3748;
+  border-color: #374151;
+  color: #60a5fa;
+}
+body.lsw-dark-mode .lsw-reading-float-btn {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: #fff;
+}
+body.lsw-dark-mode .krds-btn.link.basic {
+   color: var(--krds-color-light-primary-20);
+}
+
+/* ========================================
+   고대비 모드
+   ======================================== */
+body.lsw-high-contrast {
+  background-color: #000;
+  color: #fff;
+}
+body.lsw-high-contrast #app {
+  background-color: #000;
+}
+body.lsw-high-contrast #krds-header {
+  background-color: #000;
+  border-bottom: 2px solid #fff;
+}
+body.lsw-high-contrast #krds-masthead {
+  background-color: #111;
+}
+body.lsw-high-contrast .lsw-sub-header {
+  background-color: #003380;
+}
+body.lsw-high-contrast .lsw-quick-menu-area {
+  background-color: #003380;
+}
+body.lsw-high-contrast .lsw-quick-menu-area .lsw-quick-menu-wrap {
+  background-color: #000;
+  border-color: #fff;
+  box-shadow: 0 0 0 2px #fff;
+}
+body.lsw-high-contrast .content {
+  background-color: #000;
+}
+body.lsw-high-contrast .content-inner {
+  background-color: #000;
+}
+body.lsw-high-contrast .lsw-law-title {
+  color: #fff;
+}
+body.lsw-high-contrast .lsw-law-abbr {
+  color: #ccc;
+}
+body.lsw-high-contrast .lsw-law-meta {
+  border-color: #555;
+}
+body.lsw-high-contrast .lsw-chapter-title {
+  color: #ffff00;
+}
+body.lsw-high-contrast .lsw-article-text {
+  color: #fff;
+  font-size: var(--krds-mobile-font-size-body-medium);
+}
+body.lsw-high-contrast .lsw-article-title {
+  color: #00ccff;
+}
+body.lsw-high-contrast .lsw-clause-list > li {
+  color: #fff;
+}
+body.lsw-high-contrast .lsw-bottom-toolbar {
+  background-color: #111;
+  border-color: #555;
+}
+body.lsw-high-contrast .lsw-bottom-toolbar .lsw-tabbar-btn {
+  color: #fff;
+}
+body.lsw-high-contrast .lsw-bottom-toolbar .lsw-tabbar-btn::after {
+  background: #fff;
+}
+body.lsw-high-contrast .lsw-bottom-toolbar .lsw-tabbar-item.active .lsw-tabbar-btn {
+  color: #ffff00;
+}
+body.lsw-high-contrast .lsw-bottom-toolbar .lsw-tabbar-item.active .lsw-tabbar-btn::after {
+  background: #ffff00;
+}
+body.lsw-high-contrast .lsw-action-sheet,
+body.lsw-high-contrast .lsw-reading-settings,
+body.lsw-high-contrast .lsw-compare-sheet {
+  background: #111;
+  border: 2px solid #fff;
+}
+body.lsw-high-contrast .lsw-setting-label {
+  color: #fff;
+}
+body.lsw-high-contrast .lsw-toc-drawer {
+  background: #111;
+  border-left: 2px solid #fff;
+}
+body.lsw-high-contrast .lsw-toc-chapter-title {
+  background: #003380;
+  color: #ffff00;
+  border-left-color: #ffff00;
+}
+body.lsw-high-contrast .lsw-toc-article-link {
+  color: #fff;
+  border-color: #555;
+}
+body.lsw-high-contrast .lsw-toc-article-link.is-current {
+  background: #003380;
+  color: #ffff00;
+}
+body.lsw-high-contrast .lsw-article-action-btn {
+  border-color: #fff;
+  color: #fff;
+}
+
+@media (max-width:767px) {
+   .lsw-sub-header .inner {
+      padding: 0 16px;
+   }
+   .lsw-quick-menu {
+      padding: 8px 16px 10px;
+   }
+   .content-inner {
+      padding: 0 16px;
+   }
+}
