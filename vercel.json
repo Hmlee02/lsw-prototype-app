@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "law-detail.html",
+      "permanent": false
+    }
+  ]
+}
