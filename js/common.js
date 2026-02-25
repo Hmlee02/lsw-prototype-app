@@ -11,7 +11,22 @@ const App = (function () {
   /** 초기화 */
   function init() {
     console.log('[App] initialized');
+    _restoreSettings();
     _bindEvents();
+  }
+
+  /** localStorage 설정 복원 (페이지 로드 시) */
+  function _restoreSettings() {
+    if (localStorage.getItem('lsw-dark-mode') === 'true') {
+      document.body.classList.add('lsw-dark-mode');
+      const chk = $('#darkModeToggle');
+      if (chk) chk.checked = true;
+    }
+    if (localStorage.getItem('lsw-font-large') === 'true') {
+      document.body.classList.add('lsw-font-large');
+      const chk = $('#fontSizeToggle');
+      if (chk) chk.checked = true;
+    }
   }
 
   /** 공통 이벤트 바인딩 */
@@ -40,6 +55,34 @@ const App = (function () {
 
     if (navOpenBtn)  navOpenBtn.addEventListener('click', openNav);
     if (navCloseBtn) navCloseBtn.addEventListener('click', closeNav);
+
+    // ============================
+    // 카테고리 오버레이 레이어 토글
+    // ============================
+    (function initPulldownLayer() {
+      const layer = document.getElementById('pulldownLayer');
+      const backdrop = document.getElementById('pulldownBackdrop');
+      const closeBtn = document.getElementById('pulldownClose');
+      if (!layer) return;
+
+      function openLayer() {
+        layer.classList.add('is-open');
+        if (backdrop) backdrop.classList.add('is-open');
+        layer.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeLayer() {
+        layer.classList.remove('is-open');
+        if (backdrop) backdrop.classList.remove('is-open');
+        layer.setAttribute('aria-hidden', 'true');
+      }
+
+      if (closeBtn) closeBtn.addEventListener('click', closeLayer);
+      if (backdrop) backdrop.addEventListener('click', closeLayer);
+
+      // 페이지 로드 시 자동 열기
+      setTimeout(openLayer, 500);
+    })();
 
     // 빠른메뉴 단축 액션 라우팅 (위임)
     document.addEventListener('click', function (e) {
@@ -128,12 +171,36 @@ const App = (function () {
       });
     });
 
-    // Quick Guide 플로팅 버튼 (메인 페이지)
-    const quickGuideBtn = $('#quickGuideBtn');
-    if (quickGuideBtn) {
-      quickGuideBtn.addEventListener('click', function () {
-        alert('Quick Guide 기능은 추후 구현 예정입니다.');
+    // 플로팅 FAB → 화면 설정 바텀 시트 (index.html)
+    const fabToggleBtn      = $('#fabToggleBtn');
+    const fabSettingsSheet   = $('#fabSettingsSheet');
+    const fabSettingsOverlay = $('#fabSettingsOverlay');
+
+    function openFabSettings() {
+      if (!fabSettingsSheet) return;
+      fabSettingsSheet.removeAttribute('hidden');
+      requestAnimationFrame(() => fabSettingsSheet.classList.add('is-open'));
+      if (fabSettingsOverlay) fabSettingsOverlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      if (fabToggleBtn) fabToggleBtn.setAttribute('aria-expanded', 'true');
+    }
+    function closeFabSettings() {
+      if (!fabSettingsSheet) return;
+      fabSettingsSheet.classList.remove('is-open');
+      if (fabSettingsOverlay) fabSettingsOverlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+      if (fabToggleBtn) fabToggleBtn.setAttribute('aria-expanded', 'false');
+      setTimeout(() => { fabSettingsSheet.setAttribute('hidden', ''); }, 300);
+    }
+
+    if (fabToggleBtn) {
+      fabToggleBtn.addEventListener('click', function () {
+        const isOpen = this.getAttribute('aria-expanded') === 'true';
+        isOpen ? closeFabSettings() : openFabSettings();
       });
+    }
+    if (fabSettingsOverlay) {
+      fabSettingsOverlay.addEventListener('click', closeFabSettings);
     }
 
     // ============================
@@ -323,28 +390,34 @@ const App = (function () {
     if (tabReadingSettings)     tabReadingSettings.addEventListener('click', openReadingSettings);
     if (readingSettingsOverlay) readingSettingsOverlay.addEventListener('click', closeReadingSettings);
 
-    // 큰글씨 모드 토글 (읽기 설정 내부)
+
+
+    // ============================
+    // 다크모드 / 큰글씨 — 읽기 설정 체크박스 (law-detail.html)
+    // ============================
+    const darkModeToggle = $('#darkModeToggle');
+    if (darkModeToggle) {
+      darkModeToggle.checked = document.body.classList.contains('lsw-dark-mode');
+      darkModeToggle.addEventListener('change', function () {
+        const isActive = this.checked;
+        document.body.classList.toggle('lsw-dark-mode', isActive);
+        localStorage.setItem('lsw-dark-mode', String(isActive));
+        if (isActive) {
+          document.body.classList.remove('lsw-high-contrast');
+          localStorage.removeItem('lsw-high-contrast');
+          const hc = $('#highContrastToggle');
+          if (hc) hc.checked = false;
+        }
+      });
+    }
+
     const fontSizeToggle = $('#fontSizeToggle');
     if (fontSizeToggle) {
-      // 초기 상태 동기화
       fontSizeToggle.checked = document.body.classList.contains('lsw-font-large');
       fontSizeToggle.addEventListener('change', function () {
         const isActive = this.checked;
         document.body.classList.toggle('lsw-font-large', isActive);
-      });
-    }
-
-    // 다크 모드 토글
-    const darkModeToggle = $('#darkModeToggle');
-    if (darkModeToggle) {
-      darkModeToggle.addEventListener('change', function () {
-        document.body.classList.toggle('lsw-dark-mode', this.checked);
-        // 다크 모드 활성 시 고대비 해제
-        if (this.checked) {
-          document.body.classList.remove('lsw-high-contrast');
-          const hc = $('#highContrastToggle');
-          if (hc) hc.checked = false;
-        }
+        localStorage.setItem('lsw-font-large', String(isActive));
       });
     }
 
@@ -356,6 +429,7 @@ const App = (function () {
         // 고대비 활성 시 다크 모드 해제
         if (this.checked) {
           document.body.classList.remove('lsw-dark-mode');
+          localStorage.setItem('lsw-dark-mode', 'false');
           const dm = $('#darkModeToggle');
           if (dm) dm.checked = false;
         }

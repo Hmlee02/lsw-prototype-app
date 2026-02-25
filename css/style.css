@@ -18,12 +18,28 @@
   top: 0;
 }
 
+/* 스크롤 시 fixed 헤더: #app 폭에 맞춤 */
+#wrap[class*=scroll] #krds-header:not(.sample) .header-in {
+  max-width: 480px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#wrap.scroll-down #krds-header:not(.sample) .header-in {
+  transform: translate(-50%, -100%);
+}
+
+#wrap.scroll-up #krds-header:not(.sample) .header-in {
+  transform: translate(-50%, 0);
+}
+
 /* btn-navi 높이: KRDS 기본 4rem(64px) → 모바일 52px 헤더에 맞게 44px */
 #krds-header .btn-navi.all,
 #krds-header .btn-navi.sch {
   min-height: 44px;
   padding: 0 4px;
 }
+
 
 /* 데스크톱에서도 헤더 네비 버튼(큰글씨/전체메뉴) 노출 */
 @media (min-width: 1024px) {
@@ -210,6 +226,8 @@
   margin-top: 8px;
 }
 
+
+
 .lsw-gnb-section {
   margin-top: 16px;
 }
@@ -348,7 +366,6 @@
   margin-top: 10px;
 }
 
-#mobile-nav.krds-main-menu-mobile .lsw-link-item,
 #mobile-nav.krds-main-menu-mobile .lsw-quick-link,
 #mobile-nav.krds-main-menu-mobile .lsw-stat,
 #mobile-nav.krds-main-menu-mobile .lsw-gnb-card {
@@ -575,10 +592,22 @@
    메인 페이지 (index.html) Styles
    ========================================================= */
 
+/* ---- 섹션 공통 좌우 패딩 (16px 통일) ---- */
+#lsw-content > .krds-section {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* 검색 영역: 배경색 전체 폭 → 좌우 padding 해제, .inner로 처리 */
+#lsw-content > .lsw-search-area {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /* ---- 검색 영역 ---- */
 .lsw-search-area {
-  background-color: var(--krds-color-light-primary-60);
-  padding: 12px 16px 16px;
+  background-color: var(--krds-color-light-primary-80);
+  padding: 12px 0;
 }
 
 .lsw-search-wrap {
@@ -586,14 +615,6 @@
   background-color: var(--krds-color-light-gray-0);
   border-radius: var(--krds-radius-medium1);
   overflow: hidden;
-}
-
-.lsw-search-wrap .krds-input {
-  border: 2px solid var(--krds-color-light-primary-50);
-  border-radius: var(--krds-radius-medium1);
-  height: 48px;
-  padding-right: 88px; /* increased padding for two buttons */
-  font-size: var(--krds-mobile-font-size-body-small);
 }
 
 .lsw-search-actions {
@@ -628,34 +649,178 @@
   flex-shrink: 0;
 }
 
-/* ---- 카테고리 그리드 ---- */
-.lsw-category-section {
+/* ============================================
+   카테고리 오버레이 레이어 (absolute position)
+   ============================================ */
+
+/* 반투명 배경 */
+.lsw-pulldown-backdrop {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.lsw-pulldown-backdrop.is-open {
+  display: block;
+  opacity: 1;
+}
+
+/* 레이어 패널 */
+.lsw-pulldown-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--krds-color-light-gray-0);
+  border-bottom-left-radius: var(--krds-radius-xlarge1);
+  border-bottom-right-radius: var(--krds-radius-xlarge1);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  overflow: hidden;
+}
+
+.lsw-pulldown-layer.is-open {
+  transform: translateY(0);
+}
+
+.lsw-pulldown-inner {
   padding: 20px 16px 8px;
+  background: linear-gradient(180deg,
+    var(--krds-color-light-primary-5) 0%,
+    var(--krds-color-light-gray-0) 100%);
 }
 
-.lsw-category-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px 4px;
+.lsw-pulldown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 8px;
 }
 
-.lsw-category-item {
+.lsw-pulldown-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--krds-mobile-font-size-body-medium);
+  font-weight: 700;
+  color: var(--krds-color-light-primary-80);
+  margin: 0;
+}
+
+.lsw-pulldown-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--krds-color-light-text-basic);
+  border-radius: var(--krds-radius-small1);
+  transition: background-color 0.15s;
+}
+
+.lsw-pulldown-close:hover,
+.lsw-pulldown-close:focus-visible {
+  background-color: var(--krds-color-light-primary-10);
+}
+
+.lsw-pulldown-body {
+  padding: 12px 0;
+}
+
+/* ---- KRDS 푸터 ---- */
+#krds-footer .f-logo {
+  background-image: none;
+}
+
+.lsw-intro-circle-list {
+  display: flex;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  justify-content: flex-start;
+}
+
+.lsw-intro-circle-list::-webkit-scrollbar {
+  display: none;
+}
+
+.lsw-intro-circle-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 12px 4px 8px;
+  gap: 8px;
+  min-width: 72px;
+  padding: 6px 4px 4px;
   text-decoration: none;
-  border-radius: var(--krds-radius-medium1);
-  transition: background-color 0.2s;
+  scroll-snap-align: start;
+  transition: transform 0.2s;
+}
+
+.lsw-intro-circle-item:hover,
+.lsw-intro-circle-item:focus {
+  transform: translateY(-2px);
+}
+
+.lsw-intro-circle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: var(--krds-color-light-primary-60);
+  box-shadow: 0 2px 8px rgba(26, 111, 181, 0.10);
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.lsw-intro-circle-item:hover .lsw-intro-circle-icon,
+.lsw-intro-circle-item:focus .lsw-intro-circle-icon {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(26, 111, 181, 0.2);
+}
+
+/* 전체보기 아이콘: 강조 스타일 */
+.lsw-intro-cate-all .lsw-intro-circle-icon {
+  background-color: var(--krds-color-light-primary-60);
+  color: #fff;
+}
+
+.lsw-intro-cate-all:hover .lsw-intro-circle-icon,
+.lsw-intro-cate-all:focus .lsw-intro-circle-icon {
+  background-color: var(--krds-color-light-primary-70);
+}
+
+.lsw-intro-circle-label {
+  font-size: var(--krds-mobile-font-size-label-xsmall);
+  font-weight: 600;
+  color: var(--krds-color-light-text-basic);
   text-align: center;
+  word-break: keep-all;
+  line-height: 1.3;
 }
 
-.lsw-category-item:hover,
-.lsw-category-item:focus {
-  background-color: var(--krds-color-light-gray-5);
-}
+/* (오늘 하루 닫기 — 추후 복원용, 현재 미사용) */
 
+/* 기존 호환: 카테고리 인라인 아이콘 (law-detail 등에서 사용 시) */
 .lsw-cate-icon {
   display: flex;
   align-items: center;
@@ -680,7 +845,8 @@
 
 /* ---- 퀵링크 버튼 ---- */
 .lsw-quicklink-section {
-  padding: 4px 16px 12px;
+  padding-top: 4px;
+  padding-bottom: 12px;
 }
 
 .lsw-quicklink-row {
@@ -689,21 +855,24 @@
   flex-wrap: wrap;
 }
 
+.lsw-quicklink-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
 /* .lsw-quicklink-section 컨텍스트 + .krds-btn 클래스 → 0,3,0
    KRDS .krds-btn.small.tertiary(0,3,0): 동등 특이도, 나중 로드로 우선적용 */
 .lsw-quicklink-section .krds-btn.lsw-quicklink-btn {
-  flex: 1;
   min-width: 0;
   text-align: center;
-  font-size: var(--krds-mobile-font-size-label-xsmall);
   padding: 8px 6px;
-  border-radius: var(--krds-radius-xsmall1);
   white-space: nowrap;
 }
 
 /* ---- AI 배너 ---- */
 .lsw-ai-banner {
-  margin: 0 16px 12px;
+  margin-bottom: 16px;
 }
 
 .lsw-ai-banner-link {
@@ -713,8 +882,9 @@
 
 .lsw-ai-banner-inner {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
+  flex-direction: column;
   gap: 8px;
   background: linear-gradient(135deg, var(--krds-color-light-success-5) 0%, var(--krds-color-light-success-10) 100%);
   border-radius: var(--krds-radius-medium1);
@@ -722,7 +892,6 @@
 }
 
 .lsw-ai-text {
-  font-size: var(--krds-mobile-font-size-body-xsmall);
   color: var(--krds-color-light-gray-80);
   line-height: 1.5;
   flex: 1;
@@ -736,20 +905,19 @@
 /* 0,2,0 > .krds-btn.small(0,2,0): 동급, 나중 로드 → 우선적용 */
 .lsw-ai-banner-inner .krds-btn {
   flex-shrink: 0;
-  font-size: var(--krds-mobile-font-size-label-xsmall);
   white-space: nowrap;
 }
 
 /* ---- 배너 캐러셀 ---- */
 .lsw-banner-section {
-  margin: 0 16px 16px;
+  margin-bottom: 16px;
 }
 
 .lsw-banner-card {
   background: linear-gradient(135deg, var(--krds-color-light-secondary-80) 0%, var(--krds-color-light-primary-60) 100%);
   border-radius: var(--krds-radius-xlarge1);
-  padding: 20px;
-  min-height: 100px;
+  padding: 14px 16px;
+  min-height: 76px;
   display: flex;
   align-items: center;
 }
@@ -791,14 +959,82 @@
 
 /* ---- 최신 법령정보 ---- */
 .lsw-latest-section {
-  padding: 0 0 24px;
+  padding: 0 0 16px;
+}
+
+.lsw-latest-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 16px 8px;
+}
+.lsw-latest-scroll::-webkit-scrollbar {
+  display: none;
+}
+.lsw-latest-cards {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+}
+.lsw-latest-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 200px;
+  flex-shrink: 0;
+  background-color: var(--krds-color-light-gray-0);
+  border: 1px solid var(--krds-color-light-gray-10);
+  border-radius: var(--krds-radius-medium1);
+  padding: 12px;
+  text-decoration: none;
+  transition: box-shadow 0.2s;
+}
+.lsw-latest-card:hover {
+  box-shadow: 0 2px 10px var(--krds-light-color-alpha-shadow2);
+}
+.lsw-latest-card-name {
+  font-size: var(--krds-mobile-font-size-body-small);
+  font-weight: 700;
+  color: var(--krds-color-light-gray-90);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+.lsw-latest-card-meta {
+  font-size: 1.1rem;
+  color: var(--krds-color-light-gray-60);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+.lsw-latest-card-tags {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.lsw-latest-card-tags .tag {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--krds-radius-small1);
+  background-color: var(--krds-color-light-gray-5);
+  color: var(--krds-color-light-gray-60);
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid var(--krds-color-light-gray-10);
 }
 
 .lsw-section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 16px 8px;
+  padding: 16px 0 8px;
+}
+
+.lsw-section-header > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .lsw-section-title {
@@ -873,19 +1109,23 @@
   opacity: 0.5;
 }
 
-/* ---- 플로팅 Quick Guide 버튼 ---- */
+/* ---- 플로팅 FAB: 화면설정 쇼트컷 ---- */
 .lsw-floating-wrap {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .lsw-floating-btn {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--krds-radius-max);
-  background: linear-gradient(135deg, var(--krds-color-light-information-30) 0%, var(--krds-color-light-information-50) 100%);
+  background: var(--krds-color-light-primary-60);
   color: var(--krds-color-light-gray-0);
   border: none;
   cursor: pointer;
@@ -902,11 +1142,24 @@
   box-shadow: 0 6px 16px var(--krds-light-color-alpha-shadow3);
 }
 
-.lsw-floating-text {
-  font-size: var(--krds-mobile-font-size-label-xsmall);
-  font-weight: 700;
-  line-height: 1.3;
-  text-align: center;
+/* Quick Guide 보조 플로팅 버튼 */
+.lsw-floating-btn-secondary {
+  width: 40px;
+  height: 40px;
+  background: var(--krds-color-light-gray-0);
+  color: var(--krds-color-light-primary-60);
+  border: 1px solid var(--krds-color-light-gray-20);
+  box-shadow: 0 2px 8px var(--krds-light-color-alpha-shadow2);
+  text-decoration: none;
+}
+.lsw-floating-btn-secondary svg {
+  width: 20px;
+  height: 20px;
+}
+.lsw-floating-btn-secondary:hover,
+.lsw-floating-btn-secondary:focus {
+  border-color: var(--krds-color-light-primary-40);
+  color: var(--krds-color-light-primary-70);
 }
 
 /* ========================================
@@ -1004,10 +1257,6 @@
 /* ========================================
    개인화 위젯 (최근 본 법령 + 개정 알림)
    ======================================== */
-.lsw-personal-section {
-  padding: 16px 0 12px;
-  border-top: 8px solid var(--krds-color-light-gray-5);
-}
 .lsw-personal-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -1031,7 +1280,7 @@
   background-color: var(--krds-color-light-gray-0);
   border: 1px solid var(--krds-color-light-gray-10);
   border-radius: var(--krds-radius-medium1);
-  padding: 12px;
+  padding: 16px 12px;
   text-decoration: none;
   transition: box-shadow 0.2s;
 }
@@ -1039,22 +1288,19 @@
   box-shadow: 0 2px 10px var(--krds-light-color-alpha-shadow2);
 }
 .lsw-personal-card-name {
-  font-size: var(--krds-mobile-font-size-body-small);
   font-weight: 700;
-  color: var(--krds-color-light-gray-90);
-  line-height: 1.4;
   margin-top: 4px;
   word-break: keep-all;
 }
 .lsw-personal-card-article {
-  font-size: 1.1rem;
+  font-size: var(--krds-mobile-font-size-body-xsmall);
   color: var(--krds-color-light-gray-60);
   line-height: 1.4;
   word-break: keep-all;
   margin-top: 2px;
 }
 .lsw-personal-card-info {
-  font-size: 1.1rem;
+  font-size: var(--krds-mobile-font-size-body-xsmall);
   color: var(--krds-color-light-primary-50);
   margin-top: 4px;
 }
@@ -1413,6 +1659,48 @@ body.lsw-font-large .lsw-law-date {
   font-size: var(--krds-mobile-font-size-body-xsmall);
 }
 
+/* --- 큰글씨: 인덱스 페이지 섹션 --- */
+body.lsw-font-large .lsw-section-title {
+  font-size: var(--krds-mobile-font-size-heading-medium);
+}
+body.lsw-font-large .lsw-personal-card-name {
+  font-size: var(--krds-mobile-font-size-body-medium);
+}
+body.lsw-font-large .lsw-personal-card-article,
+body.lsw-font-large .lsw-personal-card-info {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+}
+body.lsw-font-large .lsw-latest-card-name {
+  font-size: var(--krds-mobile-font-size-body-medium);
+}
+body.lsw-font-large .lsw-latest-card-meta {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+}
+body.lsw-font-large .lsw-ai-text {
+  font-size: var(--krds-mobile-font-size-body-small);
+}
+body.lsw-font-large .lsw-quicklink-section .krds-btn.lsw-quicklink-btn {
+  font-size: var(--krds-mobile-font-size-body-small);
+  padding: 10px 8px;
+}
+body.lsw-font-large .lsw-intro-circle-label {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+}
+body.lsw-font-large .critical-txt {
+  font-size: var(--krds-mobile-font-size-body-medium);
+}
+body.lsw-font-large .lsw-search-chip {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+  height: 32px;
+}
+body.lsw-font-large .lsw-banner-desc {
+  font-size: var(--krds-mobile-font-size-heading-xsmall);
+}
+body.lsw-font-large .lsw-banner-title,
+body.lsw-font-large .lsw-banner-sub {
+  font-size: var(--krds-mobile-font-size-body-xsmall);
+}
+
 /* ================================================================
    480px 컨테이너 기준 fixed 포지션 보정
    데스크탑 미리보기 시 fixed 요소들이 뷰포트 전폭으로 벗어나는 문제 수정
@@ -1670,6 +1958,7 @@ body.lsw-font-large .lsw-law-date {
 /* ========================================
    다크 모드
    ======================================== */
+
 body.lsw-dark-mode {
   background-color: var(--krds-color-light-gray-100);
   color: var(--krds-color-light-gray-10);
@@ -1691,6 +1980,10 @@ body.lsw-dark-mode #krds-header .header-container .btn-navi::before {
 body.lsw-dark-mode #krds-header .btn-navi .svg-icon,
 body.lsw-dark-mode #krds-header .header-actions .svg-icon {
   filter: brightness(0) invert(1);
+}
+body.lsw-dark-mode .lsw-pulldown-inner {
+  background: var(--krds-color-light-gray-90);
+  border-color: var(--krds-color-light-gray-80);
 }
 /* 공통 아이콘 톤업: 대부분 currentColor 기반이라 색상만 올림 */
 body.lsw-dark-mode .svg-icon {
@@ -1876,6 +2169,208 @@ body.lsw-dark-mode .krds-btn.link.basic {
    color: var(--krds-color-light-primary-20);
 }
 
+
+
+/* --- 다크모드: 검색 영역 --- */
+body.lsw-dark-mode .lsw-search-area {
+  background-color: var(--krds-color-light-gray-95);
+}
+body.lsw-dark-mode .lsw-search-wrap {
+  background-color: var(--krds-color-light-gray-80);
+  border-color: var(--krds-color-light-gray-70);
+}
+body.lsw-dark-mode .lsw-search-wrap .krds-input {
+  background-color: var(--krds-color-light-gray-80);
+  color: var(--krds-color-light-gray-10);
+}
+
+/* --- 다크모드: 개인화 섹션 --- */
+body.lsw-dark-mode .lsw-personal-section {
+  border-top-color: var(--krds-color-light-gray-80);
+}
+body.lsw-dark-mode .lsw-personal-card {
+  background-color: var(--krds-color-light-gray-90);
+  border-color: var(--krds-color-light-gray-70);
+}
+body.lsw-dark-mode .lsw-personal-card-name {
+  color: var(--krds-color-light-gray-5);
+}
+body.lsw-dark-mode .lsw-personal-card-article {
+  color: var(--krds-color-light-gray-40);
+}
+body.lsw-dark-mode .lsw-personal-card-info {
+  color: var(--krds-color-light-primary-30);
+}
+body.lsw-dark-mode .lsw-personal-card--empty {
+  border-color: var(--krds-color-light-gray-70);
+  color: var(--krds-color-light-gray-50);
+}
+body.lsw-dark-mode .lsw-personal-card--empty .svg-icon {
+  color: var(--krds-color-light-gray-50);
+}
+
+/* --- 다크모드: AI 배너 --- */
+body.lsw-dark-mode .lsw-ai-banner-inner {
+  background: linear-gradient(135deg, var(--krds-color-light-gray-90) 0%, var(--krds-color-light-gray-80) 100%);
+}
+body.lsw-dark-mode .lsw-ai-text {
+  color: var(--krds-color-light-gray-20);
+}
+body.lsw-dark-mode .lsw-ai-highlight {
+  color: var(--krds-color-light-primary-30);
+}
+
+/* --- 다크모드: 최신 법령정보 --- */
+body.lsw-dark-mode .lsw-section-title {
+  color: var(--krds-color-light-gray-5);
+}
+body.lsw-dark-mode .lsw-latest-card {
+  background-color: var(--krds-color-light-gray-90);
+  border-color: var(--krds-color-light-gray-70);
+}
+body.lsw-dark-mode .lsw-latest-card-name {
+  color: var(--krds-color-light-gray-5);
+}
+body.lsw-dark-mode .lsw-latest-card-meta {
+  color: var(--krds-color-light-gray-40);
+}
+body.lsw-dark-mode .lsw-latest-card-tags .tag {
+  background-color: var(--krds-color-light-gray-80);
+  color: var(--krds-color-light-gray-30);
+  border-color: var(--krds-color-light-gray-70);
+}
+/* KRDS 탭 다크 오버라이드 */
+body.lsw-dark-mode .krds-tab-area .tab.line li .btn-tab {
+  color: var(--krds-color-light-gray-40);
+}
+body.lsw-dark-mode .krds-tab-area .tab.line li.active .btn-tab {
+  color: var(--krds-color-light-primary-30);
+}
+
+/* --- 다크모드: 퀵링크 --- */
+body.lsw-dark-mode .lsw-quicklink-section .krds-btn.tertiary.lsw-quicklink-btn {
+  background-color: var(--krds-color-light-gray-90);
+  border-color: var(--krds-color-light-gray-70);
+  color: var(--krds-color-light-gray-20);
+}
+body.lsw-dark-mode .lsw-quicklink-section .krds-btn.primary.lsw-quicklink-btn {
+  background-color: var(--krds-color-light-primary-70);
+  border-color: var(--krds-color-light-primary-80);
+  color: var(--krds-color-light-gray-0);
+}
+
+/* --- 다크모드: 배너 캐러셀 --- */
+body.lsw-dark-mode .lsw-banner-card {
+  background: linear-gradient(135deg, var(--krds-color-light-gray-90) 0%, var(--krds-color-light-gray-80) 100%);
+}
+
+/* --- 다크모드: 검색 드롭다운 --- */
+body.lsw-dark-mode .lsw-search-dropdown {
+  background-color: var(--krds-color-light-gray-90);
+  border-color: var(--krds-color-light-gray-70);
+}
+body.lsw-dark-mode .lsw-search-dropdown-section + .lsw-search-dropdown-section {
+  border-color: var(--krds-color-light-gray-70);
+}
+body.lsw-dark-mode .lsw-search-dropdown-title {
+  color: var(--krds-color-light-gray-40);
+}
+body.lsw-dark-mode .lsw-search-chip {
+  border-color: var(--krds-color-light-primary-40);
+  color: var(--krds-color-light-primary-30);
+}
+body.lsw-dark-mode .lsw-recent-item {
+  color: var(--krds-color-light-gray-20);
+}
+
+/* --- 다크모드: 카테고리 오버레이 --- */
+body.lsw-dark-mode .lsw-pulldown-layer {
+  background: var(--krds-color-light-gray-90);
+}
+body.lsw-dark-mode .lsw-pulldown-title {
+  color: var(--krds-color-light-gray-5);
+}
+body.lsw-dark-mode .lsw-intro-circle-icon {
+  background-color: var(--krds-color-light-gray-80);
+  color: var(--krds-color-light-primary-30);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+body.lsw-dark-mode .lsw-intro-cate-all .lsw-intro-circle-icon {
+  background-color: var(--krds-color-light-primary-70);
+  color: var(--krds-color-light-gray-0);
+}
+body.lsw-dark-mode .lsw-intro-circle-label {
+  color: var(--krds-color-light-gray-10);
+}
+
+/* --- 다크모드: 플로팅 버튼 --- */
+body.lsw-dark-mode .lsw-floating-btn {
+  background: var(--krds-color-light-primary-50);
+}
+body.lsw-dark-mode .lsw-floating-btn-secondary {
+  background: var(--krds-color-light-gray-85);
+  border-color: var(--krds-color-light-gray-70);
+  color: var(--krds-color-light-primary-30);
+}
+body.lsw-dark-mode .lsw-floating-btn-secondary:hover,
+body.lsw-dark-mode .lsw-floating-btn-secondary:focus {
+  border-color: var(--krds-color-light-primary-40);
+  color: var(--krds-color-light-primary-20);
+}
+
+/* --- 다크모드: 푸터 --- */
+body.lsw-dark-mode #krds-footer {
+  background-color: var(--krds-color-light-gray-95);
+  color: var(--krds-color-light-gray-40);
+}
+body.lsw-dark-mode #krds-footer .f-logo img {
+  filter: brightness(0) invert(0.8);
+}
+body.lsw-dark-mode #krds-footer .key-info strong {
+  color: var(--krds-color-light-gray-30);
+}
+body.lsw-dark-mode #krds-footer .f-btm {
+  border-color: var(--krds-color-light-gray-80);
+}
+body.lsw-dark-mode #krds-footer a {
+  color: var(--krds-color-light-gray-40);
+}
+
+/* --- 다크모드: 법령 리스트 --- */
+body.lsw-dark-mode .lsw-law-list-item {
+  border-color: var(--krds-color-light-gray-80);
+}
+body.lsw-dark-mode .lsw-law-link:hover,
+body.lsw-dark-mode .lsw-law-link:focus {
+  background-color: var(--krds-color-light-gray-80);
+}
+body.lsw-dark-mode .lsw-law-name {
+  color: var(--krds-color-light-gray-5);
+}
+body.lsw-dark-mode .lsw-law-date {
+  color: var(--krds-color-light-primary-30);
+}
+body.lsw-dark-mode .lsw-law-num {
+  color: var(--krds-color-light-gray-50);
+}
+
+/* --- 다크모드: 개정 알림 배너 --- */
+body.lsw-dark-mode .lsw-amend-alert {
+  background-color: var(--krds-color-light-gray-90);
+  border-color: var(--krds-color-light-gray-70);
+}
+body.lsw-dark-mode .lsw-amend-alert .svg-icon {
+  color: var(--krds-color-light-warning-30);
+}
+body.lsw-dark-mode .lsw-amend-alert-text {
+  color: var(--krds-color-light-gray-10);
+}
+
+/* --- 다크모드: 헤더 로고 --- */
+body.lsw-dark-mode #krds-header .lsw-logo img {
+  filter: brightness(0) invert(1);
+}
+
 /* ========================================
    고대비 모드
    ======================================== */
@@ -1989,4 +2484,75 @@ body.lsw-high-contrast .lsw-article-action-btn {
    .content-inner {
       padding: 0 16px;
    }
+}
+
+/* ========================================
+   섹션 내부 컴팩트 오버라이드
+   — KRDS 구조화 리스트 기본 패딩/갭이 모바일
+     480px 뷰에서 과도하므로 축소
+   ======================================== */
+
+/* 카드 항목 패딩: 24px → 12px */
+#lsw-content .krds-structured-list.sm > li {
+  padding: 12px;
+}
+
+/* 카드 내부 영역 간격(card-top/body/btm): 24px → 8px */
+#lsw-content .krds-structured-list > li .in {
+  gap: 8px;
+}
+
+/* card-body 내부 간격: 16px → 6px */
+#lsw-content .krds-structured-list .card-body {
+  gap: 6px;
+}
+
+/* card-body 텍스트 간격: 12px → 4px */
+#lsw-content .krds-structured-list .card-body .c-text {
+  gap: 4px;
+}
+
+/* card-btm 태그 영역: padding-top 16px → 8px */
+#lsw-content .krds-structured-list .card-btm {
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+/* 카드 간 간격: 16px → 10px */
+#lsw-content .krds-structured-list {
+  grid-gap: 10px;
+}
+
+/* 개정 알림 배너 컴팩트 */
+.lsw-personal-section .lsw-amend-alert {
+  margin: 8px 0 0;
+  padding: 10px 12px;
+}
+
+
+/* 개인화 섹션 가로스크롤 좌우 여백 */
+.lsw-personal-section .lsw-personal-scroll {
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* 최신 법령정보 가로스크롤 좌우 여백 */
+.lsw-latest-section .lsw-latest-scroll {
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* 최신 법령정보 하단 여백 */
+.lsw-latest-section {
+  padding-bottom: 16px;
+}
+
+/* 개인화 섹션 여백 */
+.lsw-personal-section {
+  padding-top: 12px;
+  padding-bottom: 8px;
 }
