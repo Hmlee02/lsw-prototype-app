@@ -819,7 +819,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: var(--krds-mobile-font-size-body-medium);
+  font-size: var(--krds-mobile-font-size-body-large);
   font-weight: 700;
   color: var(--krds-color-light-primary-80);
   margin: 0;
@@ -845,7 +845,7 @@
 }
 
 .lsw-pulldown-body {
-  padding: 24px 0;
+  padding: 16px 0;
 }
 
 /* ---- KRDS 푸터 ---- */
@@ -891,8 +891,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.8);
   color: var(--krds-color-light-primary-60);
@@ -902,8 +902,8 @@
 
 .lsw-intro-circle-icon img {
   display: block;
-  width: 36px;
-  height: 36px;
+  width: 76px;
+  height: 76px;
   object-fit: contain;
 }
 
@@ -1071,7 +1071,7 @@
   flex-direction: column;
   justify-content: flex-end;
   gap: 4px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 20%, rgba(0, 0, 0, 0.58) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 40%, rgba(0, 0, 0, 0.8) 100%);
 }
 
 .lsw-hero-visual-eyebrow {
@@ -1099,7 +1099,9 @@
 }
 
 .lsw-hero-visual-cta .svg-icon {
-  color: currentColor;
+  background-color: currentColor;
+  width: var(--krds-icon--size-small);
+  height: var(--krds-icon--size-small);
 }
 
 /* ---- 배너 캐러셀 ---- */
@@ -1951,7 +1953,7 @@ body.lsw-font-large .lsw-latest-card-meta {
   font-size: var(--krds-mobile-font-size-body-xsmall);
 }
 body.lsw-font-large .lsw-ai-text {
-  font-size: var(--krds-mobile-font-size-body-small);
+  font-size: var(--krds-mobile-font-size-body-large);
 }
 body.lsw-font-large .lsw-quicklink-section .krds-btn.lsw-quicklink-btn {
   font-size: var(--krds-mobile-font-size-body-small);
