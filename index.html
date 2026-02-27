@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -70,16 +70,16 @@
         <div class="gnb-header">
           <div class="gnb-utils">
             <ul class="utility-list">
-              <li><button type="button" class="krds-btn small text">앱설정</button></li>
-              <li><button type="button" class="krds-btn small text">도움말</button></li>
-              <li><button type="button" class="krds-btn small text">고객센터</button></li>
+              <li><a href="#" class="lsw-utility-link">앱설정</a></li>
+              <li><a href="#" class="lsw-utility-link">도움말</a></li>
+              <li><a href="#" class="lsw-utility-link">고객센터</a></li>
             </ul>
 
           </div>
           <div class="gnb-login">
-            <button type="button" class="krds-btn medium text">
+            <a href="#" class="lsw-login-link">
               <i class="svg-icon ico-log"></i> 로그인하고 맞춤 메뉴 보기
-            </button>
+            </a>
           </div>
           <div class="form-group lsw-gnb-search">
             <div class="form-conts btn-ico-wrap">
@@ -113,10 +113,10 @@
               <div class="gnb-sub-list" id="mMenu-quick">
                 <h2 class="sub-title">바로가기</h2>
                 <div class="lsw-gnb-section lsw-quick-grid">
-                  <button type="button" class="krds-btn medium text lsw-quick-link">불편법령신고센터</button>
-                  <button type="button" class="krds-btn medium text lsw-quick-link">도움말</button>
-                  <button type="button" class="krds-btn medium text lsw-quick-link">법령용어</button>
-                  <button type="button" class="krds-btn medium text lsw-quick-link">법률명약칭</button>
+                  <a href="#" class="lsw-quick-link">불편법령신고센터</a>
+                  <a href="#" class="lsw-quick-link">도움말</a>
+                  <a href="#" class="lsw-quick-link">법령용어</a>
+                  <a href="#" class="lsw-quick-link">법률명약칭</a>
                 </div>
 
                 <div class="lsw-gnb-section lsw-gnb-card">
@@ -152,53 +152,50 @@
                       <p class="lsw-gnb-label">자주찾는 메뉴</p>
                       <p class="lsw-gnb-desc">즐겨 쓰는 메뉴를 모아 빠르게 접근하세요</p>
                     </div>
-                    <button type="button" class="krds-btn small text">메뉴설정</button>
+                    <a href="#" class="lsw-gnb-action">메뉴설정</a>
                   </div>
                   <ul class="lsw-link-list">
-                    <li><a href="#" class="krds-btn medium text lsw-link-item">법령 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="krds-btn medium text lsw-link-item">행정규칙 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="lsw-link-item">법령 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="lsw-link-item">행정규칙 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
                   </ul>
                 </div>
 
                 <div class="lsw-gnb-section">
-                  <div class="lsw-gnb-row">
-                    <div>
-                      <p class="lsw-gnb-label">즐겨찾기</p>
-                      <p class="lsw-gnb-desc">등록일자순으로 확인</p>
-                    </div>
-                    <button type="button" class="krds-btn small text">확인</button>
-                  </div>
-                  <div class="lsw-gnb-row">
-                    <div>
-                      <p class="lsw-gnb-label">최근본법령</p>
-                      <p class="lsw-gnb-desc">최근 본 날짜순으로 확인</p>
-                    </div>
-                    <button type="button" class="krds-btn small text">확인</button>
-                  </div>
+                  <p class="lsw-gnb-label">최근 활동</p>
+                  <ul class="lsw-my-summary-list" aria-label="최근 활동 바로가기">
+                    <li class="lsw-my-summary-item">
+                      <span class="lsw-gnb-desc">즐겨찾기</span>
+                      <a href="#" class="lsw-gnb-action">확인</a>
+                    </li>
+                    <li class="lsw-my-summary-item">
+                      <span class="lsw-gnb-desc">최근본법령</span>
+                      <a href="#" class="lsw-gnb-action">확인</a>
+                    </li>
+                  </ul>
                 </div>
               </div>
 
               <div class="gnb-sub-list" id="mMenu-search">
                 <h2 class="sub-title">탐색</h2>
-                <ul class="lsw-link-list lsw-gnb-section">
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">법령 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">행정규칙 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">판례 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">자치법규 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">법령용어 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">법률명약칭 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">입법예고 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">법령안내 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">연령별형명법령집 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                <ul class="lsw-link-list lsw-link-list--simple lsw-gnb-section">
+                  <li><a href="#" class="lsw-link-item">법령 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">행정규칙 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">판례 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">자치법규 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">법령용어 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">법률명약칭 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">입법예고 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">법령안내 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">연령별형명법령집 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
                 </ul>
               </div>
 
               <div class="gnb-sub-list" id="mMenu-support">
                 <h2 class="sub-title">센터</h2>
-                <ul class="lsw-link-list lsw-gnb-section">
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">법령해석례 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">작성례 · 해석례 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
-                  <li><a href="#" class="krds-btn medium text lsw-link-item">국가법령정보센터 개인정보처리방침 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                <ul class="lsw-link-list lsw-link-list--simple lsw-gnb-section">
+                  <li><a href="#" class="lsw-link-item">법령해석례 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">작성례 · 해석례 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
+                  <li><a href="#" class="lsw-link-item">국가법령정보센터 개인정보처리방침 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a></li>
                 </ul>
               </div>
             </div>
@@ -277,65 +274,47 @@
         </section>
 
         <!-- =============================== -->
-        <!-- [2] 개인화: 나의 맞춤 정보 (역피라미드 — 최상단 배치) -->
+        <!-- [2] 메인 비주얼 (핵심 이슈) -->
+        <!-- 이미지 교체 경로 예시: image/main-visual.jpg 또는 image/main-visual.png -->
         <!-- =============================== -->
-        <section class="krds-section lsw-personal-section">
-          <div class="lsw-section-header">
-            <div>
-              <span class="krds-badge outline-gray">맞춤</span>
-              <h2 class="lsw-section-title">나의 맞춤 정보</h2>
+        <section class="krds-section lsw-hero-visual" aria-label="오늘의 법령 이슈">
+          <a href="#" class="lsw-hero-visual-link">
+            <div class="lsw-hero-visual-media">
+              <img src="image/main-visual.jpg" alt="오늘의 법령 이슈 배경 이미지" loading="lazy">
             </div>
-            <a href="#" class="krds-btn small text">전체보기 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
-          </div>
-          <div class="lsw-personal-scroll" aria-label="나의 맞춤 카드">
-            <div class="lsw-personal-cards">
-              <a href="law-detail.html" class="lsw-personal-card">
-                <span class="krds-badge outline-primary">최근 본 법령</span>
-                <span class="lsw-personal-card-name">인공지능기본법</span>
-                <span class="lsw-personal-card-article">마지막: 제2조(정의)</span>
-                <span class="lsw-personal-card-info">시행 2026.1.22.</span>
-              </a>
-              <a href="law-detail.html" class="lsw-personal-card">
-                <span class="krds-badge outline-secondary">나의 메모</span>
-                <span class="lsw-personal-card-name">건축법 제11조</span>
-                <span class="lsw-personal-card-article">허가 요건 확인 필요</span>
-                <span class="lsw-personal-card-info">작성 2026.2.24.</span>
-              </a>
-              <a href="law-detail.html" class="lsw-personal-card">
-                <span class="krds-badge outline-primary">최근 본 법령</span>
-                <span class="lsw-personal-card-name">도로교통법 시행규칙</span>
-                <span class="lsw-personal-card-article">마지막: 제93조</span>
-                <span class="lsw-personal-card-info">시행 2026.2.24.</span>
-              </a>
-              <div class="lsw-personal-card lsw-personal-card--empty">
-                <i class="svg-icon ico-plus" aria-hidden="true"></i>
-                <span>법령 추가</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- =============================== -->
-        <!-- [3] AI 검색 안내 배너 (역피라미드 — 핵심 기능 조기 노출) -->
-        <!-- =============================== -->
-        <section class="krds-section lsw-ai-banner">
-          <a href="#" class="lsw-ai-banner-link">
-            <div class="lsw-ai-banner-inner">
-              <p class="lsw-ai-text"><span class="lsw-ai-highlight">일상용어</span>나 <span class="lsw-ai-highlight">문장</span>으로 <strong>법령을 검색</strong>할 수 있습니다.</p>
-              <span class="krds-btn small primary">AI 법령검색 바로가기 <i class="svg-icon ico-go"></i></span>
+            <div class="lsw-hero-visual-content">
+              <p class="lsw-hero-visual-eyebrow">오늘의 이슈</p>
+              <h2 class="lsw-hero-visual-title">국가법령정보센터가 편리해졌어요!</h2>
+              <span class="lsw-hero-visual-cta">주요 개선사항 바로가기 <i class="svg-icon ico-angle right" aria-hidden="true"></i></span>
             </div>
           </a>
         </section>
 
         <!-- =============================== -->
-        <!-- [5] 최신 법령정보: KRDS 탭 + Structured List -->
+        <!-- [3] AI 검색 안내 배너 (핵심 기능 조기 노출) -->
+        <!-- =============================== -->
+        <section class="krds-section lsw-ai-banner">
+          <a href="#" class="lsw-ai-banner-link">
+            <div class="lsw-ai-banner-inner">
+              <p class="lsw-ai-text"><span class="lsw-ai-highlight">일상용어</span>나 <span class="lsw-ai-highlight">문장</span>으로 <strong>법령을 검색</strong>할 수 있습니다.</p>
+              <span class="lsw-ai-cta">AI 법령검색 바로가기 <i class="svg-icon ico-go"></i></span>
+            </div>
+          </a>
+        </section>
+
+        <!-- =============================== -->
+        <!-- [4] 최신 법령정보: KRDS 탭 + Structured List -->
         <!-- =============================== -->
         <section class="krds-section lsw-latest-section">
           <div class="lsw-section-header">
             <h2 class="lsw-section-title">최신 법령정보</h2>
-            <a href="#" class="krds-btn small icon" aria-label="더보기">
-              <i class="svg-icon ico-plus"></i>
-            </a>
+            <a href="#" class="lsw-inline-link" aria-label="최신 법령정보 더보기">더보기 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
+          </div>
+
+          <input type="checkbox" id="lawDetailCoachmarkToggle" class="lsw-coachmark-toggle" checked>
+          <div class="lsw-coachmark" id="lawDetailCoachmark" role="note" aria-live="polite">
+            <p class="lsw-coachmark-text">이 카드를 누르면 법령 상세 화면으로 이동합니다.</p>
+            <label for="lawDetailCoachmarkToggle" class="lsw-coachmark-close" id="lawDetailCoachmarkClose" aria-label="안내 닫기" role="button" tabindex="0">닫기</label>
           </div>
 
           <div class="krds-tab-area layer">
@@ -361,11 +340,11 @@
                 <h3 class="sr-only">법령 최신정보</h3>
                 <div class="lsw-latest-scroll">
                   <div class="lsw-latest-cards">
-                    <a href="law-detail.html" class="lsw-latest-card">
-                      <span class="lsw-latest-card-name">도로교통법 시행규칙</span>
-                      <span class="lsw-latest-card-meta">[시행 2026.2.24.]</span>
-                      <span class="lsw-latest-card-meta">[행정안전부령 제610호]</span>
-                      <div class="lsw-latest-card-tags"><span class="tag">법령</span><span class="tag">개정</span></div>
+                    <a href="law-detail.html" class="lsw-latest-card" id="lawDetailEntryTarget">
+                      <span class="lsw-latest-card-name">인공지능 발전과 신뢰 기반 조성 등에 관한 기본법</span>
+                      <span class="lsw-latest-card-meta">[시행 2026.1.22.]</span>
+                      <span class="lsw-latest-card-meta">[법률 제21311호]</span>
+                      <div class="lsw-latest-card-tags"><span class="tag">법령</span><span class="tag">일부개정</span></div>
                     </a>
                     <a href="law-detail.html" class="lsw-latest-card">
                       <span class="lsw-latest-card-name">개인정보 보호법 시행령</span>
@@ -426,6 +405,45 @@
         </section>
 
         <!-- =============================== -->
+        <!-- [5] 개인화: 나의 맞춤 정보 -->
+        <!-- =============================== -->
+        <section class="krds-section lsw-personal-section">
+          <div class="lsw-section-header">
+            <div>
+              <span class="krds-badge outline-gray">맞춤</span>
+              <h2 class="lsw-section-title">나의 맞춤 정보</h2>
+            </div>
+            <a href="#" class="lsw-inline-link">전체보기 <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
+          </div>
+          <div class="lsw-personal-scroll" aria-label="나의 맞춤 카드">
+            <div class="lsw-personal-cards">
+              <a href="law-detail.html" class="lsw-personal-card">
+                <span class="krds-badge outline-primary">최근 본 법령</span>
+                <span class="lsw-personal-card-name">인공지능기본법</span>
+                <span class="lsw-personal-card-article">마지막: 제2조(정의)</span>
+                <span class="lsw-personal-card-info">시행 2026.1.22.</span>
+              </a>
+              <a href="law-detail.html" class="lsw-personal-card">
+                <span class="krds-badge outline-secondary">나의 메모</span>
+                <span class="lsw-personal-card-name">건축법 제11조</span>
+                <span class="lsw-personal-card-article">허가 요건 확인 필요</span>
+                <span class="lsw-personal-card-info">작성 2026.2.24.</span>
+              </a>
+              <a href="law-detail.html" class="lsw-personal-card">
+                <span class="krds-badge outline-primary">최근 본 법령</span>
+                <span class="lsw-personal-card-name">도로교통법 시행규칙</span>
+                <span class="lsw-personal-card-article">마지막: 제93조</span>
+                <span class="lsw-personal-card-info">시행 2026.2.24.</span>
+              </a>
+              <div class="lsw-personal-card lsw-personal-card--empty">
+                <i class="svg-icon ico-plus" aria-hidden="true"></i>
+                <span>법령 추가</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================== -->
         <!-- [6] 퀵 링크 + 배너 (부가정보 — 하단 배치) -->
         <!-- =============================== -->
         <section class="krds-section lsw-quicklink-section">
@@ -434,7 +452,7 @@
             <a href="#" class="krds-btn small tertiary lsw-quicklink-btn">앱 불편신고</a>
             <a href="#" class="krds-btn small tertiary lsw-quicklink-btn">메일링 서비스 신청</a>
             <a href="#" class="krds-btn small tertiary lsw-quicklink-btn">실시간 검색순위</a>
-            <a href="#" class="krds-btn small primary lsw-quicklink-btn">입법예고</a>
+            <a href="#" class="krds-btn small tertiary lsw-quicklink-btn">입법예고</a>
           </div>
         </section>
 
@@ -559,7 +577,7 @@
             <li>
               <a href="#" class="lsw-intro-circle-item lsw-intro-cate-all">
                 <span class="lsw-intro-circle-icon">
-                  <svg viewBox="0 0 48 48" width="36" height="36"><line x1="14" y1="16" x2="34" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="24" x2="34" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="32" x2="34" y2="32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <img src="image/intro-cate-all.jpg" alt="" aria-hidden="true">
                 </span>
                 <span class="lsw-intro-circle-label">전체보기</span>
               </a>
@@ -567,7 +585,7 @@
             <li>
               <a href="law-detail.html" class="lsw-intro-circle-item">
                 <span class="lsw-intro-circle-icon">
-                  <svg viewBox="0 0 48 48" width="36" height="36"><rect x="12" y="8" width="24" height="32" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" font-size="12" fill="currentColor" font-weight="bold">法</text></svg>
+                  <img src="image/intro-cate-law.jpg" alt="" aria-hidden="true">
                 </span>
                 <span class="lsw-intro-circle-label">법령</span>
               </a>
@@ -575,7 +593,7 @@
             <li>
               <a href="#" class="lsw-intro-circle-item">
                 <span class="lsw-intro-circle-icon">
-                  <svg viewBox="0 0 48 48" width="36" height="36"><rect x="8" y="16" width="32" height="24" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="14" y="8" width="20" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                  <img src="image/intro-cate-rule.jpg" alt="" aria-hidden="true">
                 </span>
                 <span class="lsw-intro-circle-label">행정규칙</span>
               </a>
@@ -583,7 +601,7 @@
             <li>
               <a href="#" class="lsw-intro-circle-item">
                 <span class="lsw-intro-circle-icon">
-                  <svg viewBox="0 0 48 48" width="36" height="36"><path d="M14 38V12l10-6 10 6v26" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="22" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                  <img src="image/intro-cate-table.jpg" alt="" aria-hidden="true">
                 </span>
                 <span class="lsw-intro-circle-label">별표</span>
               </a>
@@ -591,7 +609,7 @@
             <li>
               <a href="#" class="lsw-intro-circle-item">
                 <span class="lsw-intro-circle-icon">
-                  <svg viewBox="0 0 48 48" width="36" height="36"><rect x="6" y="10" width="20" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="22" y="10" width="20" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                  <img src="image/intro-cate-local.jpg" alt="" aria-hidden="true">
                 </span>
                 <span class="lsw-intro-circle-label">자치법규</span>
               </a>
@@ -599,7 +617,7 @@
             <li>
               <a href="#" class="lsw-intro-circle-item">
                 <span class="lsw-intro-circle-icon">
-                  <svg viewBox="0 0 48 48" width="36" height="36"><rect x="8" y="8" width="32" height="32" rx="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                  <img src="image/intro-cate-interpret.jpg" alt="" aria-hidden="true">
                 </span>
                 <span class="lsw-intro-circle-label">해석례</span>
               </a>
@@ -607,7 +625,7 @@
             <li>
               <a href="#" class="lsw-intro-circle-item">
                 <span class="lsw-intro-circle-icon">
-                  <svg viewBox="0 0 48 48" width="36" height="36"><path d="M12 38V14l12-6 12 6v24" fill="none" stroke="currentColor" stroke-width="2"/><rect x="18" y="20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                  <img src="image/intro-cate-public.jpg" alt="" aria-hidden="true">
                 </span>
                 <span class="lsw-intro-circle-label">공공기관</span>
               </a>
